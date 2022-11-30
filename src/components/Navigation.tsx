@@ -67,7 +67,7 @@ export default function Navigation() {
               whileTap={{ scale: 0.95 }}
             >
               <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center glow-cyan">
-                <Code2 className="w-5 h-5 text-white" />
+                <Code2 className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold gradient-text hidden sm:block">
                 Portfolio
@@ -83,8 +83,8 @@ export default function Navigation() {
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                     activeSection === item.href.slice(1)
-                      ? 'text-white'
-                      : 'text-white/60 hover:text-white'
+                      ? 'text-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -105,7 +105,7 @@ export default function Navigation() {
             <motion.a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl btn-gradient text-white text-sm font-semibold"
+              className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl btn-gradient text-primary-foreground text-sm font-semibold"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -120,9 +120,9 @@ export default function Navigation() {
               whileTap={{ scale: 0.95 }}
             >
               {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-white" />
+                <X className="w-5 h-5 text-foreground" />
               ) : (
-                <Menu className="w-5 h-5 text-white" />
+                <Menu className="w-5 h-5 text-foreground" />
               )}
             </motion.button>
           </div>
@@ -151,8 +151,8 @@ export default function Navigation() {
                     transition={{ delay: index * 0.1 }}
                     className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                       activeSection === item.href.slice(1)
-                        ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white'
-                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                        ? 'bg-primary/10 text-foreground'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                     }`}
                   >
                     {item.label}
@@ -164,7 +164,7 @@ export default function Navigation() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.1 }}
-                  className="block px-4 py-3 rounded-xl btn-gradient text-white text-sm font-semibold text-center mt-4"
+                  className="block px-4 py-3 rounded-xl btn-gradient text-primary-foreground text-sm font-semibold text-center mt-4"
                 >
                   Hire Me
                 </motion.a>

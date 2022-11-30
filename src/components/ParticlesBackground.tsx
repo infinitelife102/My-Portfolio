@@ -4,7 +4,6 @@ import * as THREE from 'three';
 
 function ParticleField() {
   const meshRef = useRef<THREE.Points>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
 
   const count = 200;
 
@@ -44,16 +43,6 @@ function ParticleField() {
     return colors;
   }, []);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   useFrame((state) => {
     if (!meshRef.current) return;
 
@@ -63,16 +52,6 @@ function ParticleField() {
       positionArray[i * 3] += velocities[i * 3];
       positionArray[i * 3 + 1] += velocities[i * 3 + 1];
       positionArray[i * 3 + 2] += velocities[i * 3 + 2];
-
-      // Mouse interaction
-      const dx = positionArray[i * 3] - mouseRef.current.x * 5;
-      const dy = positionArray[i * 3 + 1] - mouseRef.current.y * 5;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 2) {
-        positionArray[i * 3] += dx * 0.01;
-        positionArray[i * 3 + 1] += dy * 0.01;
-      }
 
       // Boundary check
       if (Math.abs(positionArray[i * 3]) > 10) velocities[i * 3] *= -1;

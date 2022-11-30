@@ -27,7 +27,7 @@ const contactInfo = [
 ];
 
 const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-white' },
+  { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-foreground' },
   { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
   { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-sky-400' },
   { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:text-pink-400' },
@@ -78,13 +78,13 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-2 block">
+          <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-2 block">
             Get In Touch
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-heading mb-4">
             Let's <span className="gradient-text">Connect</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto font-medium">
             Have a project in mind or just want to chat? I'd love to hear from you!
           </p>
         </motion.div>
@@ -110,11 +110,11 @@ export default function Contact() {
                   className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/5 transition-all group"
                 >
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0`}>
-                    <item.icon className="w-5 h-5 text-white" />
+                    <item.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
-                    <p className="text-white/50 text-sm">{item.label}</p>
-                    <p className="text-white font-medium group-hover:text-cyan-400 transition-colors">
+                    <p className="text-muted-foreground text-sm font-medium">{item.label}</p>
+                    <p className="text-foreground font-semibold group-hover:text-primary transition-colors">
                       {item.value}
                     </p>
                   </div>
@@ -129,7 +129,7 @@ export default function Contact() {
               transition={{ duration: 0.4, delay: 0.6 }}
               className="glass rounded-xl p-6"
             >
-              <h4 className="text-white font-semibold mb-4">Follow Me</h4>
+              <h4 className="text-foreground font-semibold mb-4">Follow Me</h4>
               <div className="flex gap-3">
                 {socialLinks.map((social) => (
                   <motion.a
@@ -137,7 +137,7 @@ export default function Contact() {
                     href={social.href}
                     whileHover={{ scale: 1.1, y: -4 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-11 h-11 rounded-xl glass flex items-center justify-center text-white/60 ${social.color} transition-colors social-icon`}
+                    className={`w-11 h-11 rounded-xl glass flex items-center justify-center text-muted-foreground ${social.color} transition-colors social-icon`}
                     aria-label={social.label}
                   >
                     <social.icon className="w-5 h-5" />
@@ -164,7 +164,7 @@ export default function Contact() {
                 </div>
                 <span className="text-green-400 font-medium">Available for Work</span>
               </div>
-              <p className="text-white/60 text-sm">
+              <p className="text-muted-foreground text-sm font-medium">
                 I'm currently open to new opportunities and interesting projects. 
                 Let's create something amazing together!
               </p>
@@ -180,8 +180,8 @@ export default function Contact() {
           >
             <div className="gradient-border p-0.5 rounded-2xl h-full">
               <div className="glass rounded-2xl p-6 sm:p-8 h-full">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5 text-cyan-400" />
+                <h3 className="text-xl font-bold text-heading mb-6 flex items-center gap-2">
+                  <MessageCircle className="w-5 h-5 text-primary" />
                   Send Me a Message
                 </h3>
 
@@ -199,60 +199,60 @@ export default function Contact() {
                     >
                       <CheckCircle className="w-8 h-8 text-green-400" />
                     </motion.div>
-                    <h4 className="text-xl font-bold text-white mb-2">Message Sent!</h4>
-                    <p className="text-white/60">Thank you for reaching out. I'll get back to you soon!</p>
+                    <h4 className="text-xl font-bold text-foreground mb-2">Message Sent!</h4>
+                    <p className="text-muted-foreground font-medium">Thank you for reaching out. I'll get back to you soon!</p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-white/70 text-sm mb-2">Your Name</label>
+                        <label className="block text-foreground/90 text-sm mb-2 font-medium">Your Name</label>
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400/50 input-glow transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 input-glow transition-all font-medium"
                           placeholder="John Doe"
                         />
                       </div>
                       <div>
-                        <label className="block text-white/70 text-sm mb-2">Your Email</label>
+                        <label className="block text-foreground/90 text-sm mb-2 font-medium">Your Email</label>
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400/50 input-glow transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 input-glow transition-all font-medium"
                           placeholder="john@example.com"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-white/70 text-sm mb-2">Subject</label>
+                      <label className="block text-foreground/90 text-sm mb-2 font-medium">Subject</label>
                       <input
                         type="text"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400/50 input-glow transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 input-glow transition-all font-medium"
                         placeholder="Project Inquiry"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-white/70 text-sm mb-2">Message</label>
+                      <label className="block text-foreground/90 text-sm mb-2 font-medium">Message</label>
                       <textarea
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
                         required
                         rows={5}
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-cyan-400/50 input-glow transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 input-glow transition-all resize-none font-medium"
                         placeholder="Tell me about your project..."
                       />
                     </div>
@@ -262,7 +262,7 @@ export default function Contact() {
                       disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 rounded-xl btn-gradient text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-4 rounded-xl btn-gradient text-primary-foreground font-semibold flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                       {isSubmitting ? (
                         <>

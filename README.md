@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A developer portfolio for **Alex Chen**.  
+Single-page app built with React, TypeScript, and Vite. Showcases skills, experience, projects, and contact.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Runtime / Build**: Node.js 20+, Vite 7.x
+- **UI**: React 19, TypeScript, Tailwind CSS, Framer Motion
+- **UI components**: Radix UI (shadcn/ui style)
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 20+
+- npm or yarn
 
-## Expanding the ESLint configuration
+## Run locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Install dependencies
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start dev server (default: http://localhost:5173)
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The browser tab title is **My Portfolio** and the favicon uses a developer/code icon.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build & preview
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Production build
+npm run build
+
+# Preview build output
+npm run preview
 ```
+
+Output is written to the `dist/` directory.
+
+## Project structure
+
+```
+src/
+├── components/     # Shared components (Navigation, Footer, ui/)
+├── sections/       # Page sections (Hero, About, Resume, Portfolio, Contact)
+├── App.tsx         # Root component
+├── main.tsx        # Entry point
+├── index.css       # Global styles, Tailwind
+└── ...
+```
+
+- **Background**: Static grid + subtle gradient (no particle or cursor animation).
+- **Scripts**: See table below.
+
+## Scripts
+
+| Command           | Description        |
+|-------------------|--------------------|
+| `npm run dev`     | Start dev server   |
+| `npm run build`   | Production build   |
+| `npm run preview` | Preview build      |
+| `npm run lint`    | Run ESLint         |
+
+## Docs
+
+- [info.md](./info.md) — Project setup, components, directory overview.
+
+## License
+
+Private. This repo is for portfolio use only.

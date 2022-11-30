@@ -152,7 +152,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 whileTap={{ scale: 0.95 }}
                 className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center"
               >
-                <Eye className="w-5 h-5 text-white" />
+                <Eye className="w-5 h-5 text-primary-foreground" />
               </motion.a>
               <motion.a
                 href={project.githubUrl}
@@ -160,13 +160,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 whileTap={{ scale: 0.95 }}
                 className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white/10"
               >
-                <Github className="w-5 h-5 text-white" />
+                <Github className="w-5 h-5 text-primary-foreground" />
               </motion.a>
             </motion.div>
 
             {/* Category Badge */}
             <div className="absolute top-4 left-4">
-              <span className="px-3 py-1 rounded-full glass text-xs font-medium text-white/80 capitalize">
+              <span className="px-3 py-1 rounded-full glass text-xs font-medium text-foreground/90 capitalize">
                 {project.category}
               </span>
             </div>
@@ -174,18 +174,18 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             {/* Stats */}
             <div className="absolute top-4 right-4 flex gap-3">
               <div className="flex items-center gap-1 glass px-2 py-1 rounded-full">
-                <Eye className="w-3 h-3 text-white/60" />
-                <span className="text-xs text-white/60">{project.stats.views}</span>
+                <Eye className="w-3 h-3 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground font-medium">{project.stats.views}</span>
               </div>
             </div>
           </div>
 
           {/* Content */}
           <div className="p-5 flex-1 flex flex-col">
-            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
               {project.title}
             </h3>
-            <p className="text-white/60 text-sm mb-4 line-clamp-2 flex-1">
+            <p className="text-muted-foreground text-sm mb-4 line-clamp-2 flex-1 font-medium">
               {project.description}
             </p>
 
@@ -194,7 +194,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               {project.tech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 rounded-md text-xs font-medium bg-white/5 text-white/70 border border-white/10"
+                  className="px-2 py-1 rounded-md text-xs font-medium bg-muted/50 text-foreground/90 border border-border"
                 >
                   {tech}
                 </span>
@@ -226,13 +226,13 @@ export default function Portfolio() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-2 block">
+          <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-2 block">
             My Work
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-heading mb-4">
             Featured <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto font-medium">
             A collection of projects that showcase my skills and passion for creating amazing digital experiences
           </p>
         </motion.div>
@@ -253,7 +253,7 @@ export default function Portfolio() {
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category.id
                   ? 'filter-btn-active'
-                  : 'glass text-white/70 hover:text-white hover:bg-white/10'
+                  : 'glass text-foreground/90 hover:text-foreground hover:bg-foreground/5'
               }`}
             >
               <category.icon className="w-4 h-4" />
@@ -287,7 +287,7 @@ export default function Portfolio() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl glass text-white font-semibold hover:bg-white/10 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl glass text-foreground font-semibold hover:bg-foreground/5 transition-colors"
           >
             <Github className="w-5 h-5" />
             View More on GitHub

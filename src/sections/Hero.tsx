@@ -39,63 +39,12 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, currentRoleIndex]);
 
-  const scrollToAbout = () => {
-    const element = document.getElementById('about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section
       id="home"
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 grid-bg" />
-      
-      {/* Floating Orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500/20 blur-3xl"
-        animate={{
-          x: [0, 50, 0],
-          y: [0, -30, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-purple-500/20 blur-3xl"
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 40, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-pink-500/15 blur-3xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
       {/* Content */}
       <div className="section-container relative z-10 pt-20">
         <div className="max-w-5xl mx-auto">
@@ -107,8 +56,8 @@ export default function Hero() {
             className="flex justify-center mb-6"
           >
             <div className="glass px-4 py-2 rounded-full flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-cyan-400" />
-              <span className="text-sm text-white/80">Welcome to my creative space</span>
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm text-foreground/90 font-semibold">Developer · Builder</span>
             </div>
           </motion.div>
 
@@ -117,9 +66,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-center mb-4"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-center mb-4 text-heading"
           >
-            <span className="text-white">Hi, I'm </span>
+            <span className="text-foreground">Hi, I'm </span>
             <span className="gradient-text">Alex Chen</span>
           </motion.h1>
 
@@ -130,9 +79,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-8"
           >
-            <span className="text-xl sm:text-2xl md:text-3xl text-white/70 font-light">
+            <span className="text-xl sm:text-2xl md:text-3xl text-foreground/85 font-medium">
               I'm a{' '}
-              <span className="text-cyan-400 font-medium typing-cursor">
+              <span className="text-primary font-semibold typing-cursor">
                 {displayText}
               </span>
             </span>
@@ -143,7 +92,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-center text-white/60 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-center text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
           >
             I craft beautiful digital experiences with modern technologies.
             Passionate about creating innovative solutions that make a difference.
@@ -162,7 +111,7 @@ export default function Hero() {
                 e.preventDefault();
                 document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-4 rounded-xl btn-gradient text-white font-semibold flex items-center gap-2"
+              className="px-8 py-4 rounded-xl btn-gradient text-primary-foreground font-semibold flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -175,7 +124,7 @@ export default function Hero() {
                 e.preventDefault();
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-4 rounded-xl glass text-white font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors"
+              className="px-8 py-4 rounded-xl glass text-foreground font-semibold flex items-center gap-2 hover:bg-foreground/5 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -199,7 +148,7 @@ export default function Hero() {
               <motion.a
                 key={social.label}
                 href={social.href}
-                className="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all social-icon"
+                className="w-12 h-12 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all social-icon"
                 whileHover={{ scale: 1.1, y: -4 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={social.label}
@@ -209,29 +158,6 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          >
-            <motion.button
-              onClick={scrollToAbout}
-              className="flex flex-col items-center gap-2 text-white/40 hover:text-white/60 transition-colors"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <span className="text-xs uppercase tracking-widest">Scroll</span>
-              <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-1">
-                <motion.div
-                  className="w-1.5 h-3 rounded-full bg-current"
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-              </div>
-            </motion.button>
-          </motion.div>
         </div>
       </div>
 

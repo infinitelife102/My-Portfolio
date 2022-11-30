@@ -120,9 +120,9 @@ function TimelineItem({ item, index, isLeft }: { item: any; index: number; isLef
           className="w-12 h-12 rounded-full timeline-dot flex items-center justify-center z-10"
         >
           {isWork ? (
-            <Briefcase className="w-5 h-5 text-white" />
+            <Briefcase className="w-5 h-5 text-primary" />
           ) : (
-            <GraduationCap className="w-5 h-5 text-white" />
+            <GraduationCap className="w-5 h-5 text-primary" />
           )}
         </motion.div>
         {index < 2 && (
@@ -135,31 +135,31 @@ function TimelineItem({ item, index, isLeft }: { item: any; index: number; isLef
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
           <div>
-            <h4 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+            <h4 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
               {isWork ? item.title : item.degree}
             </h4>
-            <div className="flex items-center gap-2 text-white/60 mt-1">
+            <div className="flex items-center gap-2 text-muted-foreground mt-1 font-medium">
               <Building2 className="w-4 h-4" />
               <span className="text-sm">{isWork ? item.company : item.school}</span>
-              <span className="text-white/30">•</span>
+              <span className="text-border">•</span>
               <span className="text-sm">{isWork ? item.location : item.location}</span>
             </div>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass">
-            <Calendar className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-white/80">{item.period}</span>
+            <Calendar className="w-4 h-4 text-primary" />
+            <span className="text-sm text-foreground/90 font-medium">{item.period}</span>
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-white/70 text-sm leading-relaxed mb-4">
+        <p className="text-foreground/90 text-sm leading-relaxed mb-4 font-medium">
           {item.description}
         </p>
 
         {/* Achievements */}
         <ul className="space-y-2 mb-4">
           {item.achievements.map((achievement: string, i: number) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/60">
+            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
               {achievement}
             </li>
@@ -172,7 +172,7 @@ function TimelineItem({ item, index, isLeft }: { item: any; index: number; isLef
             {item.tech.map((tech: string) => (
               <span
                 key={tech}
-                className="px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20"
               >
                 {tech}
               </span>
@@ -198,13 +198,13 @@ export default function Resume() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-2 block">
+          <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-2 block">
             My Journey
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-heading mb-4">
             Resume & <span className="gradient-text">Experience</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto font-medium">
             A timeline of my professional growth and educational background
           </p>
         </motion.div>
@@ -219,9 +219,9 @@ export default function Resume() {
               className="flex items-center gap-3 mb-8"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-white" />
+                <Briefcase className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Work Experience</h3>
+              <h3 className="text-2xl font-bold text-heading">Work Experience</h3>
             </motion.div>
 
             <div className="space-y-8">
@@ -240,9 +240,9 @@ export default function Resume() {
               className="flex items-center gap-3 mb-8"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-white" />
+                <GraduationCap className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold text-white">Education</h3>
+              <h3 className="text-2xl font-bold text-heading">Education</h3>
             </motion.div>
 
             <div className="space-y-8">
@@ -260,7 +260,7 @@ export default function Resume() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-16"
         >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-2xl font-bold text-heading mb-8 text-center">
             <span className="gradient-text">Certifications</span>
           </h3>
           <div className="grid sm:grid-cols-3 gap-6">
@@ -274,11 +274,11 @@ export default function Resume() {
                 className="glass rounded-xl p-6 text-center group hover:bg-white/5 transition-all"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-600/20 flex items-center justify-center mx-auto mb-4 group-hover:from-cyan-400/30 group-hover:to-purple-600/30 transition-colors">
-                  <cert.icon className="w-7 h-7 text-cyan-400" />
+                  <cert.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h4 className="text-white font-semibold mb-1">{cert.name}</h4>
-                <p className="text-white/50 text-sm">{cert.issuer}</p>
-                <p className="text-cyan-400 text-xs mt-2">{cert.date}</p>
+                <h4 className="text-foreground font-semibold mb-1">{cert.name}</h4>
+                <p className="text-muted-foreground text-sm font-medium">{cert.issuer}</p>
+                <p className="text-primary text-xs mt-2 font-medium">{cert.date}</p>
               </motion.div>
             ))}
           </div>

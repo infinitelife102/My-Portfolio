@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 220 20% 4%;
-    --foreground: 0 0% 98%;
-    --card: 220 20% 6%;
-    --card-foreground: 0 0% 98%;
-    --popover: 220 20% 6%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 190 100% 50%;
-    --primary-foreground: 220 20% 4%;
-    --secondary: 260 100% 60%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
-    --accent: 320 100% 60%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
+    --background: 222 20% 5%;
+    --foreground: 210 20% 98%;
+    --card: 222 18% 7%;
+    --card-foreground: 210 20% 98%;
+    --popover: 222 18% 7%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 187 85% 53%;
+    --primary-foreground: 222 20% 6%;
+    --secondary: 255 15% 25%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 18% 12%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 267 70% 55%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 15% 20%;
-    --input: 220 15% 15%;
-    --ring: 190 100% 50%;
-    --radius: 0.625rem;
+    --border: 222 15% 18%;
+    --input: 222 15% 14%;
+    --ring: 187 85% 53%;
+    --radius: 0.5rem;
   }
 
   * {
@@ -31,12 +31,13 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased font-medium;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.01em;
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 }
 
@@ -74,16 +75,17 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* Gradient Text */
+  /* Gradient Text — clean accent */
   .gradient-text {
-    background: linear-gradient(135deg, #00f5ff 0%, #7c3aed 50%, #f472b6 100%);
+    background: linear-gradient(135deg, hsl(187 85% 58%) 0%, hsl(267 70% 60%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-weight: 700;
   }
 
   .gradient-text-cyan {
-    background: linear-gradient(135deg, #00f5ff 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, hsl(187 85% 58%) 0%, hsl(217 90% 55%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -241,7 +243,7 @@
   .typing-cursor::after {
     content: '|';
     animation: blink 1s step-end infinite;
-    color: hsl(190 100% 50%);
+    color: hsl(var(--primary));
   }
 }
 
@@ -263,21 +265,6 @@
 
 @keyframes blink {
   50% { opacity: 0; }
-}
-
-@keyframes aurora-move {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(50px, -50px) scale(1.1);
-  }
-  50% {
-    transform: translate(-30px, 30px) scale(0.9);
-  }
-  75% {
-    transform: translate(-50px, -30px) scale(1.05);
-  }
 }
 
 @keyframes fade-in-up {
@@ -319,8 +306,8 @@
   background-size: 50px 50px;
 }
 
-/* Aurora Background */
-.aurora-bg {
+/* Developer portfolio background */
+.dev-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -330,39 +317,33 @@
   z-index: 0;
 }
 
-.aurora-blob {
+.grid-bg-full {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  animation: aurora-move 20s ease-in-out infinite;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.aurora-blob-1 {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, #00f5ff, #3b82f6);
-  top: -200px;
-  left: -200px;
-  animation-delay: 0s;
+.gradient-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 211, 238, 0.04) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-.aurora-blob-2 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, #7c3aed, #f472b6);
-  top: 50%;
-  right: -150px;
-  animation-delay: -7s;
+/* Typography — weighty, clean */
+.text-heading {
+  @apply text-foreground font-semibold tracking-tight;
 }
 
-.aurora-blob-3 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #f472b6, #00f5ff);
-  bottom: -100px;
-  left: 30%;
-  animation-delay: -14s;
+.text-body {
+  @apply text-foreground/90 font-medium;
+}
+
+.text-muted {
+  @apply text-muted-foreground font-medium;
 }
 
 /* Card 3D Effect */

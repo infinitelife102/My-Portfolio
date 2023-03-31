@@ -3,8 +3,24 @@
 ## Overview
 
 - **Project**: My Portfolio  
-- **Purpose**: Developer portfolio for Alex Chen  
+- **Purpose**: Developer portfolio; profile and contact data are configured via environment variables (no hardcoded personal data).  
 - **Stack**: Node.js 20+, Vite 7.x, React 19, TypeScript, Tailwind CSS 3.4.x  
+
+## Environment variables
+
+Defined in `.env` (see `.env.example`). All `VITE_*` vars are exposed to the client.
+
+| Variable | Used in | Description |
+|----------|---------|-------------|
+| `VITE_PROFILE_NAME` | Hero, About (initials), CV PDF | Full name |
+| `VITE_PROFILE_EMAIL` | About, Contact, CV PDF | Email |
+| `VITE_PROFILE_LOCATION` | About, Contact, CV PDF | Location (e.g. Tokyo) |
+| `VITE_PROFILE_BIRTHDAY` | About, CV PDF | Birthday (e.g. Aug 1995) |
+| `VITE_DISCORD` | Contact | Optional. Discord URL or username |
+| `VITE_WHATSAPP` | Contact | Optional. WhatsApp number with country code |
+| `VITE_FORMSPREE_ID` | Contact form | Formspree form ID so "Send Me a Message" emails you |
+
+Config is read from `src/lib/env.ts`. Contact form POSTs to `https://formspree.io/f/{VITE_FORMSPREE_ID}` with JSON body.
 
 ## Config summary
 
@@ -23,12 +39,15 @@ src/
 │   ├── ui/           # shadcn-style UI (button, card, dialog, etc.)
 │   ├── Navigation.tsx
 │   └── Footer.tsx
+├── lib/              # Shared logic
+│   ├── env.ts        # Profile/contact config from import.meta.env
+│   └── downloadCv.ts # CV PDF generation (jsPDF) using env
 ├── sections/         # Main page sections
-│   ├── Hero.tsx      # Hero, name (Alex Chen), role typing
-│   ├── About.tsx     # Intro, skills, stats
+│   ├── Hero.tsx      # Hero, name from env, role typing, Download CV
+│   ├── About.tsx     # Intro, skills, stats; Born/Location/Email from env
 │   ├── Resume.tsx    # Experience / education timeline
-│   ├── Portfolio.tsx # Project cards
-│   └── Contact.tsx   # Contact form
+│   ├── Portfolio.tsx # Project cards (no "View More on GitHub")
+│   └── Contact.tsx   # Email + optional Discord/WhatsApp, Formspree form
 ├── App.tsx           # Root: loading, DevBackground, nav, footer
 ├── main.tsx          # React entry
 └── index.css         # Tailwind, global and background styles
@@ -56,6 +75,7 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 - **Background**: `DevBackground` only (grid + gradient). No particles or custom cursor.
 - **Tab**: `index.html` — `<title>My Portfolio</title>`, `/favicon.svg`.
 - **Routing**: Single page; section links use anchors (#about, #portfolio, #contact).
+- **Contact form**: Real submission via Formspree when `VITE_FORMSPREE_ID` is set. Messages are sent to the form owner's email.
 
 ## References
 
@@ -68,6 +88,7 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 
 ```bash
 npm install
+cp .env.example .env   # then edit .env
 npm run dev      # Development
 npm run build    # Build
 npm run preview  # Preview dist

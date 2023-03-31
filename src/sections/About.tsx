@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Calendar, Mail, MapPin, GraduationCap, Users, Briefcase, Clock, Award } from 'lucide-react';
+import { env, getProfileInitials } from '@/lib/env';
 
 const stats = [
   { icon: Users, value: 50, suffix: '+', label: 'Happy Clients' },
@@ -95,7 +96,7 @@ export default function About() {
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center glow-cyan">
-                      <span className="text-5xl font-bold text-primary-foreground">AC</span>
+                      <span className="text-5xl font-bold text-primary-foreground">{getProfileInitials()}</span>
                     </div>
                   </div>
                   {/* Decorative Elements */}
@@ -114,9 +115,9 @@ export default function About() {
                 {/* Info Grid */}
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: Calendar, label: 'Born', value: 'Aug 1995' },
-                    { icon: MapPin, label: 'Location', value: 'San Francisco' },
-                    { icon: Mail, label: 'Email', value: 'alex@dev.com' },
+                    { icon: Calendar, label: 'Born', value: env.profileBirthday },
+                    { icon: MapPin, label: 'Location', value: env.profileLocation },
+                    { icon: Mail, label: 'Email', value: env.profileEmail },
                     { icon: GraduationCap, label: 'Degree', value: 'CS Bachelor' },
                   ].map((item, index) => (
                     <motion.div

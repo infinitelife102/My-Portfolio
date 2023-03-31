@@ -1,37 +1,37 @@
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Instagram, MessageCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { Mail, Send, MessageCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { env } from '@/lib/env';
 
-const contactInfo = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'alex.chen@dev.com',
-    href: 'mailto:alex.chen@dev.com',
-    color: 'from-cyan-400 to-blue-500',
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
-    color: 'from-purple-400 to-pink-500',
-  },
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: 'San Francisco, CA',
-    href: '#',
-    color: 'from-pink-400 to-rose-500',
-  },
-];
-
-const socialLinks = [
-  { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-foreground' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
-  { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-sky-400' },
-  { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:text-pink-400' },
-];
+function useContactChannels() {
+  const channels: { icon: typeof Mail; label: string; value: string; href: string }[] = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: env.profileEmail,
+      href: `mailto:${env.profileEmail}`,
+    },
+  ];
+  if (env.discord?.trim()) {
+    const discordUrl = env.discord.startsWith('http') ? env.discord : `https://discord.com/users/${env.discord}`;
+    channels.push({
+      icon: MessageCircle,
+      label: 'Discord',
+      value: env.discord,
+      href: discordUrl,
+    });
+  }
+  if (env.whatsapp?.trim()) {
+    const num = env.whatsapp.replace(/\D/g, '');
+    channels.push({
+      icon: MessageCircle,
+      label: 'WhatsApp',
+      value: env.whatsapp,
+      href: `https://wa.me/${num}`,
+    });
+  }
+  return channels;
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -42,23 +42,41 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const contactChannels = useContactChannels();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+    if (!env.formspreeId?.trim()) {
+      setSubmitError('Contact form is not configured. Set VITE_FORMSPREE_ID in .env');
+      return;
+    }
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const res = await fetch(`https://formspree.io/f/${env.formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Request failed: ${res.status}`);
+      }
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -71,7 +89,6 @@ export default function Contact() {
   return (
     <section id="contact" ref={sectionRef} className="relative py-24 lg:py-32">
       <div className="section-container">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -90,26 +107,26 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Left Column - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2 space-y-6"
           >
-            {/* Contact Cards */}
             <div className="space-y-4">
-              {contactInfo.map((item, index) => (
+              {contactChannels.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   whileHover={{ scale: 1.02, x: 4 }}
-                  className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-white/5 transition-all group"
+                  className="flex items-center gap-4 glass rounded-xl p-4 hover:bg-foreground/5 transition-all group"
                 >
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0`}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center flex-shrink-0">
                     <item.icon className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
@@ -122,31 +139,6 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.6 }}
-              className="glass rounded-xl p-6"
-            >
-              <h4 className="text-foreground font-semibold mb-4">Follow Me</h4>
-              <div className="flex gap-3">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    whileHover={{ scale: 1.1, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`w-11 h-11 rounded-xl glass flex items-center justify-center text-muted-foreground ${social.color} transition-colors social-icon`}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Availability Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -165,13 +157,12 @@ export default function Contact() {
                 <span className="text-green-400 font-medium">Available for Work</span>
               </div>
               <p className="text-muted-foreground text-sm font-medium">
-                I'm currently open to new opportunities and interesting projects. 
+                I'm currently open to new opportunities and interesting projects.
                 Let's create something amazing together!
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -204,6 +195,11 @@ export default function Contact() {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {submitError && (
+                      <p className="text-destructive text-sm font-medium bg-destructive/10 rounded-lg p-3">
+                        {submitError}
+                      </p>
+                    )}
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <label className="block text-foreground/90 text-sm mb-2 font-medium">Your Name</label>

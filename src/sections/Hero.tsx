@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Twitter, Download, Sparkles } from 'lucide-react';
+import { ArrowDown, Download, Sparkles } from 'lucide-react';
+import { env } from '@/lib/env';
+import { downloadCv } from '@/lib/downloadCv';
 
 const roles = [
   'Full-Stack Developer',
@@ -45,10 +47,8 @@ export default function Hero() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Content */}
       <div className="section-container relative z-10 pt-20">
         <div className="max-w-5xl mx-auto">
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,7 +61,6 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,10 +68,9 @@ export default function Hero() {
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-center mb-4 text-heading"
           >
             <span className="text-foreground">Hi, I'm </span>
-            <span className="gradient-text">Alex Chen</span>
+            <span className="gradient-text">{env.profileName}</span>
           </motion.h1>
 
-          {/* Typing Animation */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,7 +85,6 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,12 +95,11 @@ export default function Hero() {
             Passionate about creating innovative solutions that make a difference.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <motion.a
               href="#portfolio"
@@ -118,50 +114,20 @@ export default function Hero() {
               View My Work
               <ArrowDown className="w-4 h-4" />
             </motion.a>
-            <motion.a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <motion.button
+              type="button"
+              onClick={() => downloadCv()}
               className="px-8 py-4 rounded-xl glass text-foreground font-semibold flex items-center gap-2 hover:bg-foreground/5 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Download className="w-4 h-4" />
               Download CV
-            </motion.a>
+            </motion.button>
           </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex items-center justify-center gap-4"
-          >
-            {[
-              { icon: Github, href: '#', label: 'GitHub' },
-              { icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { icon: Twitter, href: '#', label: 'Twitter' },
-            ].map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                className="w-12 h-12 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all social-icon"
-                whileHover={{ scale: 1.1, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={social.label}
-              >
-                <social.icon className="w-5 h-5" />
-              </motion.a>
-            ))}
-          </motion.div>
-
         </div>
       </div>
 
-      {/* Gradient Overlay at Bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );

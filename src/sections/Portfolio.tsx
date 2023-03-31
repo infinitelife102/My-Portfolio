@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Eye, Layers, ShoppingCart, Globe, User, Home, Briefcase, Wrench } from 'lucide-react';
+import { Github, Eye, Layers, ShoppingCart, Globe, User, Home, Briefcase, Wrench } from 'lucide-react';
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -274,26 +274,6 @@ export default function Portfolio() {
           </AnimatePresence>
         </motion.div>
 
-        {/* View More Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-12"
-        >
-          <motion.a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl glass text-foreground font-semibold hover:bg-foreground/5 transition-colors"
-          >
-            <Github className="w-5 h-5" />
-            View More on GitHub
-            <ExternalLink className="w-4 h-4" />
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

@@ -1,27 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Calendar, Mail, MapPin, GraduationCap, Users, Briefcase, Clock, Award } from 'lucide-react';
+import { Calendar, Mail, MapPin, GraduationCap, Users, Briefcase, Clock } from 'lucide-react';
 import { env, getProfileInitials } from '@/lib/env';
 
 const stats = [
   { icon: Users, value: 50, suffix: '+', label: 'Happy Clients' },
   { icon: Briefcase, value: 120, suffix: '+', label: 'Projects Completed' },
   { icon: Clock, value: 8000, suffix: '+', label: 'Hours of Work' },
-  { icon: Award, value: 25, suffix: '+', label: 'Awards Won' },
 ];
 
-const skills = [
-  { name: 'JavaScript / TypeScript', level: 95 },
-  { name: 'React / Next.js', level: 92 },
-  { name: 'Node.js / Express', level: 88 },
-  { name: 'Python / Django', level: 85 },
-  { name: 'AWS / Cloud Services', level: 82 },
-  { name: 'UI/UX Design', level: 78 },
+const skillCategories = [
+  { title: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'Swift'] },
+  { title: 'Frontend', items: ['React', 'Vue.js', 'Angular', 'Next.js', 'Redux', 'Tailwind CSS'] },
+  { title: 'Mobile', items: ['React Native', 'Flutter', 'iOS (Swift)', 'Android (Kotlin)'] },
+  { title: 'Backend', items: ['Node.js', 'Express', 'Django', 'Spring Boot', 'GraphQL'] },
+  { title: 'Database', items: ['PostgreSQL', 'MongoDB', 'Redis', 'DynamoDB', 'Firebase'] },
+  { title: 'Cloud & DevOps', items: ['AWS', 'GCP', 'Azure', 'Docker', 'Kubernetes', 'CI/CD'] },
+  { title: 'AI / ML', items: ['LLMs', 'OpenAI API', 'LangChain', 'RAG', 'Vector DBs', 'Prompt Engineering', 'Hugging Face', 'PyTorch'] },
+  { title: 'Mobile Specific', items: ['Push Notifications', 'Offline Sync', 'App Store/Play Store'] },
 ];
 
 const interests = [
-  'Open Source', 'Machine Learning', 'Blockchain', 'Mobile Dev',
-  'DevOps', 'Cloud Architecture', 'System Design', 'Tech Writing',
+  'Push Notifications', 'Offline Sync', 'App Store / Play Store',
+  'Microservices', 'Cross-Platform', 'Real-time Systems',
+  'CI/CD', 'Performance Optimization', 'Mobile Best Practices',
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -118,7 +120,7 @@ export default function About() {
                     { icon: Calendar, label: 'Born', value: env.profileBirthday },
                     { icon: MapPin, label: 'Location', value: env.profileLocation },
                     { icon: Mail, label: 'Email', value: env.profileEmail },
-                    { icon: GraduationCap, label: 'Degree', value: 'CS Bachelor' },
+                    { icon: GraduationCap, label: 'Degree', value: 'B.E. Computer Software' },
                   ].map((item, index) => (
                     <motion.div
                       key={item.label}
@@ -166,7 +168,7 @@ export default function About() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -198,26 +200,25 @@ export default function About() {
           <h3 className="text-2xl font-bold text-heading mb-8 text-center">
             My <span className="gradient-text">Skills</span>
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {skills.map((skill, index) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillCategories.map((category, index) => (
               <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.7 + index * 0.08 }}
                 className="glass rounded-xl p-4"
               >
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-foreground font-semibold">{skill.name}</span>
-                  <span className="text-primary text-sm font-semibold">{skill.level}%</span>
-                </div>
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full skill-bar-fill rounded-full"
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: `${skill.level}%` } : {}}
-                    transition={{ duration: 1.5, delay: 0.8 + index * 0.1, ease: 'easeOut' }}
-                  />
+                <h4 className="text-foreground font-semibold mb-3 text-primary">{category.title}</h4>
+                <div className="flex flex-wrap gap-2">
+                  {category.items.map((item) => (
+                    <span
+                      key={item}
+                      className="px-2 py-1 rounded-md text-xs font-medium bg-muted/60 text-foreground/90 border border-border"
+                    >
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             ))}

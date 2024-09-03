@@ -5,94 +5,84 @@ import { Briefcase, GraduationCap, Award, Code2, Calendar, Building2 } from 'luc
 const experiences = [
   {
     type: 'work',
-    title: 'Senior Full-Stack Engineer',
-    company: 'TechCorp Inc.',
-    location: 'San Francisco, CA',
-    period: '2021 - Present',
-    description: 'Leading a team of 5 developers in building scalable web applications. Architected microservices infrastructure serving 1M+ users daily.',
+    title: 'Senior Software Engineer',
+    company: 'College Board',
+    location: 'Tokyo, Japan',
+    period: 'April 2021 - Present',
+    description: 'Leading cross-platform mobile, backend, and AI-integrated features with focus on scale and user experience.',
     achievements: [
-      'Reduced API response time by 60% through optimization',
-      'Implemented CI/CD pipeline reducing deployment time by 80%',
-      'Mentored junior developers and conducted code reviews',
+      'Led development of cross-platform mobile app using Flutter and React Native, achieving 4.8-star rating with 200K+ downloads',
+      'Architected microservices backend with Node.js and AWS Lambda, handling 50K+ daily active users',
+      'Integrated LLM-based features (OpenAI API, RAG) for in-app assistance and content summarization, improving engagement',
+      'Implemented real-time push notification system and offline data synchronization, improving user retention by 35%',
+      'Reduced app bundle size by 45% through code splitting and asset optimization techniques',
+      'Mentored 4 junior developers and established mobile development best practices across the team',
+      'Built CI/CD pipelines with GitHub Actions and Fastlane, reducing release cycle from 2 weeks to 3 days',
     ],
-    tech: ['React', 'Node.js', 'AWS', 'Kubernetes', 'PostgreSQL'],
+    tech: ['Flutter', 'React Native', 'Node.js', 'AWS Lambda', 'OpenAI API', 'LangChain', 'GitHub Actions', 'Fastlane'],
   },
   {
     type: 'work',
-    title: 'Full-Stack Developer',
-    company: 'StartupXYZ',
-    location: 'New York, NY',
-    period: '2019 - 2021',
-    description: 'Developed and maintained multiple client projects. Worked closely with designers to implement pixel-perfect UI.',
+    title: 'Full Stack Developer',
+    company: 'CoDigital, Inc.',
+    location: 'Tokyo, Japan',
+    period: 'June 2019 - March 2021',
+    description: 'Developed blockchain-based and consumer mobile apps with React Native and Angular.',
     achievements: [
-      'Built real-time chat application using WebSockets',
-      'Created reusable component library used across 10+ projects',
-      'Improved website performance score from 60 to 95',
+      'Developed blockchain-based mobile gaming app with React Native, integrating Web3 and wallet connectivity',
+      'Published 3 iOS/Android apps to App Store and Play Store, maintaining 99.5% crash-free rate',
+      'Built responsive admin dashboards with Angular and TypeScript, improving internal operations efficiency by 40%',
+      'Implemented deep linking and universal links for seamless user onboarding experience',
+      'Optimized app performance achieving 60fps scrolling and sub-second screen load times',
     ],
-    tech: ['Vue.js', 'Python', 'Django', 'Redis', 'Docker'],
+    tech: ['React Native', 'Angular', 'TypeScript', 'Web3', 'iOS', 'Android'],
   },
   {
     type: 'work',
-    title: 'Frontend Developer',
-    company: 'Digital Agency',
-    location: 'Los Angeles, CA',
-    period: '2017 - 2019',
-    description: 'Collaborated with cross-functional teams to deliver high-quality web applications for various clients.',
+    title: 'Mobile Developer Intern',
+    company: 'Netwise',
+    location: 'Tokyo, Japan',
+    period: 'September 2018 - May 2019',
+    description: 'Built full-featured booking and payment applications for iOS and Android.',
     achievements: [
-      'Developed 20+ responsive websites for clients',
-      'Implemented accessibility standards (WCAG 2.1)',
-      'Reduced bundle size by 40% through optimization',
+      'Built full-featured booking application with React Native for both iOS and Android platforms',
+      'Integrated secure payment processing with Stripe and Apple Pay, processing $2M+ in transactions',
+      'Implemented biometric authentication (Face ID/Touch ID) for enhanced security',
+      'Set up automated testing with Jest and Detox, achieving 85% code coverage',
     ],
-    tech: ['JavaScript', 'HTML/CSS', 'Sass', 'jQuery', 'WordPress'],
+    tech: ['React Native', 'Stripe', 'Apple Pay', 'Jest', 'Detox'],
   },
 ];
 
 const education = [
   {
     type: 'education',
-    degree: 'Master of Science in Computer Science',
-    school: 'Stanford University',
-    location: 'Stanford, CA',
-    period: '2015 - 2017',
-    description: 'Specialized in Artificial Intelligence and Machine Learning. GPA: 3.9/4.0',
-    achievements: [
-      'Published 2 research papers on neural networks',
-      'Teaching Assistant for Advanced Algorithms course',
-      'Received Outstanding Graduate Student Award',
-    ],
-  },
-  {
-    type: 'education',
-    degree: 'Bachelor of Science in Software Engineering',
-    school: 'UC Berkeley',
-    location: 'Berkeley, CA',
-    period: '2011 - 2015',
-    description: 'Dean\'s List all semesters. Minor in Mathematics.',
-    achievements: [
-      'President of Computer Science Club',
-      'Won 1st place in Hackathon 2014',
-      'GPA: 3.8/4.0',
-    ],
+    degree: 'Bachelor of Engineering',
+    school: 'University of Tokyo',
+    location: 'Tokyo, Japan',
+    period: '2014 - 2018',
+    description: 'Computer Software Engineering.',
+    achievements: [],
   },
 ];
 
 const certifications = [
   {
-    name: 'AWS Certified Solutions Architect',
+    name: 'AWS Solutions Architect - Professional',
     issuer: 'Amazon Web Services',
-    date: '2023',
+    date: '',
     icon: Award,
   },
   {
-    name: 'Google Cloud Professional',
+    name: 'Google Cloud Professional Developer',
     issuer: 'Google',
-    date: '2022',
+    date: '',
     icon: Code2,
   },
   {
-    name: 'MongoDB Certified Developer',
-    issuer: 'MongoDB',
-    date: '2021',
+    name: 'React Native Certified Developer',
+    issuer: 'Meta',
+    date: '',
     icon: Briefcase,
   },
 ];
@@ -157,14 +147,16 @@ function TimelineItem({ item, index, isLeft }: { item: any; index: number; isLef
         </p>
 
         {/* Achievements */}
-        <ul className="space-y-2 mb-4">
-          {item.achievements.map((achievement: string, i: number) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-              {achievement}
-            </li>
-          ))}
-        </ul>
+        {item.achievements && item.achievements.length > 0 && (
+          <ul className="space-y-2 mb-4">
+            {item.achievements.map((achievement: string, i: number) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                {achievement}
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Tech Stack (for work items) */}
         {isWork && item.tech && (

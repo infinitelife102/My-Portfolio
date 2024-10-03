@@ -1,6 +1,10 @@
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Github, Eye, Layers, ShoppingCart, Globe, User, Home, Briefcase, Wrench } from 'lucide-react';
+import { Github, Eye, Layers, ShoppingCart, Globe, User, Home, Briefcase, Wrench, Smartphone } from 'lucide-react';
+import imgFlutter from '@/assets/portfolio/flutter-app.svg?url';
+import imgIsowords from '@/assets/portfolio/isowords-app.svg?url';
+import imgReactNative from '@/assets/portfolio/reactnative-app.svg?url';
+import imgNowInAndroid from '@/assets/portfolio/nowinandroid-app.svg?url';
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -10,107 +14,165 @@ const categories = [
   { id: 'personal', label: 'Personal', icon: User },
   { id: 'realestate', label: 'Real Estate', icon: Home },
   { id: 'service', label: 'Service', icon: Wrench },
+  { id: 'mobile', label: 'Mobile App', icon: Smartphone },
 ];
 
 const projects = [
+  // Web — E-Commerce
   {
     id: 1,
-    title: 'LuxeMart E-Commerce',
+    title: 'Your Next Store',
     category: 'ecommerce',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-    description: 'A premium e-commerce platform with real-time inventory, AI-powered recommendations, and seamless checkout.',
-    tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Redis'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '12K', likes: '856' },
+    description: 'Open-source e-commerce platform with Next.js, Stripe, and ultra-fast storefront. Live demo available.',
+    tech: ['Next.js', 'Stripe', 'TypeScript', 'Tailwind'],
+    demoUrl: 'https://demo.yournextstore.com',
+    githubUrl: 'https://github.com/yournextstore/yournextstore',
+    stats: { views: '5.3K', likes: '643' },
   },
+  // Web — SaaS (Project management)
   {
     id: 2,
-    title: 'TaskFlow Pro',
+    title: 'Plane',
     category: 'saas',
     image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop',
-    description: 'Enterprise project management SaaS with real-time collaboration, Gantt charts, and team analytics.',
-    tech: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '8.5K', likes: '623' },
+    description: 'Open-source project management for issues, cycles, modules, and docs. Alternative to Jira and Linear.',
+    tech: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
+    demoUrl: 'https://app.plane.so',
+    githubUrl: 'https://github.com/makeplane/plane',
+    stats: { views: '36K', likes: '2.3K' },
   },
+  // Web — Web App (Crypto)
   {
     id: 3,
-    title: 'CryptoTracker',
+    title: 'EthLand',
     category: 'webapp',
     image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop',
-    description: 'Real-time cryptocurrency tracking dashboard with portfolio management and price alerts.',
-    tech: ['Vue.js', 'Python', 'WebSockets', 'AWS'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '15K', likes: '1.2K' },
+    description: 'Real-time cryptocurrency dashboard with CoinGecko/Binance APIs, TradingView charts, and WebSockets.',
+    tech: ['React', 'Vite', 'Tailwind', 'TradingView'],
+    demoUrl: 'https://eth-land.vercel.app',
+    githubUrl: 'https://github.com/kiskee/ethland',
+    stats: { views: '2K', likes: '20' },
   },
+  // Web — Personal (Portfolio)
   {
     id: 4,
-    title: 'Design Portfolio',
+    title: 'React Portfolio',
     category: 'personal',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-    description: 'Creative portfolio website for a graphic designer with immersive animations and galleries.',
-    tech: ['React', 'GSAP', 'Three.js', 'Framer Motion'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '6K', likes: '445' },
+    description: 'Popular open-source React portfolio template with clean UI and smooth animations.',
+    tech: ['React', 'JavaScript', 'CSS', 'Vercel'],
+    demoUrl: 'https://soumyajit.vercel.app',
+    githubUrl: 'https://github.com/soumyajit4419/Portfolio',
+    stats: { views: '5.4K', likes: '2.9K' },
   },
+  // Web — Real Estate
   {
     id: 5,
-    title: 'HomeFinder Pro',
+    title: 'Real Estate Hub',
     category: 'realestate',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
-    description: 'Real estate platform with virtual tours, mortgage calculator, and neighborhood insights.',
-    tech: ['Next.js', 'Mapbox', 'Prisma', 'Vercel'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '9K', likes: '712' },
+    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
+    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    demoUrl: 'https://real-estate-hub-pi.vercel.app',
+    githubUrl: 'https://github.com/AqibNiazi/real-estate-hub',
+    stats: { views: '1K', likes: '1' },
   },
+  // Web — Service (Scheduling)
   {
     id: 6,
-    title: 'FixItNow',
+    title: 'Cal.com',
     category: 'service',
     image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop',
-    description: 'On-demand home services marketplace connecting homeowners with verified professionals.',
-    tech: ['React Native', 'Firebase', 'Stripe', 'Node.js'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '7K', likes: '534' },
+    description: 'Open-source scheduling platform. Self-hosted or cloud, workflows, payments, and Calendly alternative.',
+    tech: ['Next.js', 'tRPC', 'Prisma', 'Tailwind'],
+    demoUrl: 'https://cal.com',
+    githubUrl: 'https://github.com/calcom/cal.com',
+    stats: { views: '40K', likes: '12K' },
   },
+  // Web — SaaS (Learning)
   {
     id: 7,
-    title: 'LearnHub',
+    title: 'freeCodeCamp',
     category: 'saas',
     image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&h=600&fit=crop',
-    description: 'Online learning platform with video courses, quizzes, and progress tracking.',
-    tech: ['React', 'Django', 'PostgreSQL', 'AWS S3'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '11K', likes: '892' },
+    description: 'Free coding curriculum and community. Thousands of hours of courses and tutorials, fully open source.',
+    tech: ['Node.js', 'React', 'MongoDB', 'D3.js'],
+    demoUrl: 'https://www.freecodecamp.org',
+    githubUrl: 'https://github.com/freeCodeCamp/freeCodeCamp',
+    stats: { views: '418K', likes: '40K' },
   },
+  // Web — E-Commerce (Food)
   {
     id: 8,
-    title: 'FoodieExpress',
+    title: 'TastyIgniter',
     category: 'ecommerce',
     image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=600&fit=crop',
-    description: 'Food delivery app with real-time order tracking and restaurant management system.',
-    tech: ['Flutter', 'Node.js', 'MongoDB', 'Google Maps'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '13K', likes: '967' },
+    description: 'Open-source food ordering, table reservation, and restaurant management system.',
+    tech: ['Laravel', 'PHP', 'Bootstrap', 'MySQL'],
+    demoUrl: 'https://tastyigniter.com/demo',
+    githubUrl: 'https://github.com/tastyigniter/TastyIgniter',
+    stats: { views: '2.9K', likes: '959' },
   },
+  // Web — Personal (Blog)
   {
     id: 9,
-    title: 'DevBlog',
+    title: 'Next.js MDX Blog Starter',
     category: 'personal',
     image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop',
-    description: 'Technical blogging platform with markdown editor, syntax highlighting, and newsletter.',
-    tech: ['Next.js', 'MDX', 'Tailwind', 'Vercel'],
-    demoUrl: '#',
-    githubUrl: '#',
-    stats: { views: '5K', likes: '378' },
+    description: 'Starter for building blogs with Next.js and MDX. Theme UI, syntax highlighting, Vercel-ready.',
+    tech: ['Next.js', 'MDX', 'Theme UI', 'Vercel'],
+    demoUrl: 'https://nextjs-mdx-blog-starter.vercel.app',
+    githubUrl: 'https://github.com/johnpolacek/nextjs-mdx-blog-starter',
+    stats: { views: '175', likes: '68' },
+  },
+  // Mobile — Flutter
+  {
+    id: 10,
+    title: 'Flutter Material 3 Showcase',
+    category: 'mobile',
+    image: imgFlutter,
+    description: 'Production-ready Flutter demo with 25+ modules: dashboard, chat, email, kanban, e-commerce. Web & native.',
+    tech: ['Flutter', 'Dart', 'Material 3', 'Firebase'],
+    demoUrl: 'https://flutter-material3-showcase.web.app',
+    githubUrl: 'https://github.com/momentous-developments/flutter-showcase-app',
+    stats: { views: '2K', likes: '—' },
+  },
+  // Mobile — Swift
+  {
+    id: 11,
+    title: 'isowords',
+    category: 'mobile',
+    image: imgIsowords,
+    description: 'Word search game on a 3D cube. SwiftUI + Composable Architecture. Available on App Store, open source.',
+    tech: ['Swift', 'SwiftUI', 'Composable Architecture'],
+    demoUrl: 'https://apps.apple.com/us/app/isowords/id1528246952',
+    githubUrl: 'https://github.com/pointfreeco/isowords',
+    stats: { views: '2.9K', likes: '—' },
+  },
+  // Mobile — React Native
+  {
+    id: 12,
+    title: 'React Native Gallery',
+    category: 'mobile',
+    image: imgReactNative,
+    description: 'Microsoft’s showcase app for React Native (Windows & Android). Components and code snippets for developers.',
+    tech: ['React Native', 'TypeScript', 'Windows', 'Android'],
+    demoUrl: 'https://apps.microsoft.com/store/detail/react-native-gallery/9NJHM461F0BD',
+    githubUrl: 'https://github.com/microsoft/react-native-gallery',
+    stats: { views: '126', likes: '41' },
+  },
+  // Mobile — Kotlin
+  {
+    id: 13,
+    title: 'Now in Android',
+    category: 'mobile',
+    image: imgNowInAndroid,
+    description: 'Official Android sample app in Kotlin & Jetpack Compose. News, bookmarks, push. Reference architecture.',
+    tech: ['Kotlin', 'Jetpack Compose', 'Android', 'Material 3'],
+    demoUrl: 'https://play.google.com/store/apps/details?id=com.google.samples.apps.nowinandroid',
+    githubUrl: 'https://github.com/android/nowinandroid',
+    stats: { views: '18.6K', likes: '3.5K' },
   },
 ];
 
@@ -148,6 +210,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             >
               <motion.a
                 href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center"
@@ -156,6 +220,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               </motion.a>
               <motion.a
                 href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white/10"

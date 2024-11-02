@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Download, Sparkles } from 'lucide-react';
 import { env } from '@/lib/env';
-import { downloadCv } from '@/lib/downloadCv';
+// import { downloadCv } from '@/lib/downloadCv';
 
 const roles = [
   'Full-Stack Developer',
@@ -114,7 +114,7 @@ export default function Hero() {
               View My Work
               <ArrowDown className="w-4 h-4" />
             </motion.a>
-            <motion.button
+            {/* <motion.button
               type="button"
               onClick={() => downloadCv()}
               className="px-8 py-4 rounded-xl glass text-foreground font-semibold flex items-center gap-2 hover:bg-foreground/5 transition-colors"
@@ -123,7 +123,7 @@ export default function Hero() {
             >
               <Download className="w-4 h-4" />
               Download CV
-            </motion.button>
+            </motion.button> */}
           </motion.div>
         </div>
       </div>

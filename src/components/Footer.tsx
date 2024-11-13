@@ -27,21 +27,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Made With Love */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center gap-2 text-muted-foreground text-sm font-medium"
-          >
-            Made with
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart className="w-4 h-4 text-red-400 fill-red-400" />
-            </motion.span>
-            using React & Tailwind
-          </motion.p>
 
           {/* Back to Top */}
           <motion.button

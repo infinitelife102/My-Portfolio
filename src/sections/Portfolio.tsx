@@ -30,112 +30,52 @@ const projects = [
     githubUrl: 'https://github.com/yournextstore/yournextstore',
     stats: { views: '5.3K', likes: '643' },
   },
-  // Web — SaaS (Project management)
-  {
-    id: 2,
-    title: 'Plane',
-    category: 'saas',
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop',
-    description: 'Open-source project management for issues, cycles, modules, and docs. Alternative to Jira and Linear.',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
-    demoUrl: 'https://app.plane.so',
-    githubUrl: 'https://github.com/makeplane/plane',
-    stats: { views: '36K', likes: '2.3K' },
-  },
-  // Web — Web App (Crypto)
-  {
-    id: 3,
-    title: 'EthLand',
-    category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop',
-    description: 'Real-time cryptocurrency dashboard with CoinGecko/Binance APIs, TradingView charts, and WebSockets.',
-    tech: ['React', 'Vite', 'Tailwind', 'TradingView'],
-    demoUrl: 'https://eth-land.vercel.app',
-    githubUrl: 'https://github.com/kiskee/ethland',
-    stats: { views: '2K', likes: '20' },
-  },
-  // Web — Personal (Portfolio)
-  {
-    id: 4,
-    title: 'React Portfolio',
-    category: 'personal',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-    description: 'Popular open-source React portfolio template with clean UI and smooth animations.',
-    tech: ['React', 'JavaScript', 'CSS', 'Vercel'],
-    demoUrl: 'https://soumyajit.vercel.app',
-    githubUrl: 'https://github.com/soumyajit4419/Portfolio',
-    stats: { views: '5.4K', likes: '2.9K' },
-  },
   // Web — Real Estate
   {
-    id: 5,
-    title: 'Real Estate Hub',
-    category: 'realestate',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
+    id: 6,
+    title: 'NewsFlow',
+    category: 'Mobile',
+    image: 'https://images.unsplash.com/photo-1760199789464-7d3989e22758?q=80&w=687&auto=format&fit=crop',
     description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
     tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
     demoUrl: 'https://real-estate-hub-pi.vercel.app',
-    githubUrl: 'https://github.com/AqibNiazi/real-estate-hub',
+    githubUrl: 'https://github.com/infinitelife102/NewsFlow',
     stats: { views: '1K', likes: '1' },
   },
-  // Web — Service (Scheduling)
+  // Web — Real Estate
   {
     id: 6,
-    title: 'Cal.com',
-    category: 'service',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=600&fit=crop',
-    description: 'Open-source scheduling platform. Self-hosted or cloud, workflows, payments, and Calendly alternative.',
-    tech: ['Next.js', 'tRPC', 'Prisma', 'Tailwind'],
-    demoUrl: 'https://cal.com',
-    githubUrl: 'https://github.com/calcom/cal.com',
-    stats: { views: '40K', likes: '12K' },
-  },
-  // Web — SaaS (Learning)
+    title: 'E-Commerce-Template',
+    category: 'E-Commerce',
+    image: 'https://thumbs.dreamstime.com/b/online-shopping-ecommerce-laptop-phone-bicycle-shoes-modern-technology-digital-lifestyle-retail-purchase-internet-store-person-357096364.jpg?w=768',
+    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
+    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    demoUrl: 'https://infinitelife102.github.io/E-Commerce-Template/',
+    githubUrl: 'https://github.com/infinitelife102/E-Commerce-Template',
+    stats: { views: '1K', likes: '1' },
+  },  
+  // Web App
   {
-    id: 7,
-    title: 'freeCodeCamp',
-    category: 'saas',
-    image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&h=600&fit=crop',
-    description: 'Free coding curriculum and community. Thousands of hours of courses and tutorials, fully open source.',
-    tech: ['Node.js', 'React', 'MongoDB', 'D3.js'],
-    demoUrl: 'https://www.freecodecamp.org',
-    githubUrl: 'https://github.com/freeCodeCamp/freeCodeCamp',
-    stats: { views: '418K', likes: '40K' },
-  },
-  // Web — E-Commerce (Food)
-  {
-    id: 8,
-    title: 'TastyIgniter',
-    category: 'ecommerce',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=600&fit=crop',
-    description: 'Open-source food ordering, table reservation, and restaurant management system.',
-    tech: ['Laravel', 'PHP', 'Bootstrap', 'MySQL'],
-    demoUrl: 'https://tastyigniter.com/demo',
-    githubUrl: 'https://github.com/tastyigniter/TastyIgniter',
-    stats: { views: '2.9K', likes: '959' },
-  },
-  // Web — Personal (Blog)
-  {
-    id: 9,
-    title: 'Next.js MDX Blog Starter',
-    category: 'personal',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop',
-    description: 'Starter for building blogs with Next.js and MDX. Theme UI, syntax highlighting, Vercel-ready.',
-    tech: ['Next.js', 'MDX', 'Theme UI', 'Vercel'],
-    demoUrl: 'https://nextjs-mdx-blog-starter.vercel.app',
-    githubUrl: 'https://github.com/johnpolacek/nextjs-mdx-blog-starter',
-    stats: { views: '175', likes: '68' },
+    id: 5,
+    title: 'AI-Chatting',
+    category: 'Web App',
+    image: 'https://plus.unsplash.com/premium_vector-1725939109042-ed1ce1a716cf?q=80&w=880&auto=format&fit=crop',
+    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
+    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    demoUrl: 'https://ai-chatting-one.vercel.app/',
+    githubUrl: 'https://github.com/infinitelife102/AI-Chatting',
+    stats: { views: '1K', likes: '1' },
   },
   // Mobile — Flutter
   {
     id: 10,
-    title: 'Flutter Material 3 Showcase',
+    title: 'Wisdom',
     category: 'mobile',
     image: imgFlutter,
     description: 'Production-ready Flutter demo with 25+ modules: dashboard, chat, email, kanban, e-commerce. Web & native.',
     tech: ['Flutter', 'Dart', 'Material 3', 'Firebase'],
-    demoUrl: 'https://flutter-material3-showcase.web.app',
-    githubUrl: 'https://github.com/momentous-developments/flutter-showcase-app',
+    demoUrl: 'https://apps.apple.com/us/app/wisdom-note-taking-app/id6744746646',
+    githubUrl: 'https://github.com/infinitelife102/Wisdom',
     stats: { views: '2K', likes: '—' },
   },
   // Mobile — Swift
@@ -149,18 +89,6 @@ const projects = [
     demoUrl: 'https://apps.apple.com/us/app/isowords/id1528246952',
     githubUrl: 'https://github.com/pointfreeco/isowords',
     stats: { views: '2.9K', likes: '—' },
-  },
-  // Mobile — React Native
-  {
-    id: 12,
-    title: 'React Native Gallery',
-    category: 'mobile',
-    image: imgReactNative,
-    description: 'Microsoft’s showcase app for React Native (Windows & Android). Components and code snippets for developers.',
-    tech: ['React Native', 'TypeScript', 'Windows', 'Android'],
-    demoUrl: 'https://apps.microsoft.com/store/detail/react-native-gallery/9NJHM461F0BD',
-    githubUrl: 'https://github.com/microsoft/react-native-gallery',
-    stats: { views: '126', likes: '41' },
   },
   // Mobile — Kotlin
   {
@@ -238,12 +166,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             </div>
 
             {/* Stats */}
-            <div className="absolute top-4 right-4 flex gap-3">
+            {/* <div className="absolute top-4 right-4 flex gap-3">
               <div className="flex items-center gap-1 glass px-2 py-1 rounded-full">
                 <Eye className="w-3 h-3 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground font-medium">{project.stats.views}</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Content */}

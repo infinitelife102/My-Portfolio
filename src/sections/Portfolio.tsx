@@ -1,106 +1,167 @@
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Github, Eye, Layers, ShoppingCart, Globe, User, Home, Briefcase, Wrench, Smartphone } from 'lucide-react';
-import imgFlutter from '@/assets/portfolio/flutter-app.svg?url';
-import imgIsowords from '@/assets/portfolio/isowords-app.svg?url';
-import imgReactNative from '@/assets/portfolio/reactnative-app.svg?url';
-import imgNowInAndroid from '@/assets/portfolio/nowinandroid-app.svg?url';
+import { Github, Eye, Layers, ShoppingCart, Globe, Smartphone, CheckCircle2, Trophy, Zap } from 'lucide-react';
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
-  { id: 'ecommerce', label: 'E-Commerce', icon: ShoppingCart },
-  { id: 'saas', label: 'SaaS', icon: Briefcase },
   { id: 'webapp', label: 'Web App', icon: Globe },
-  { id: 'personal', label: 'Personal', icon: User },
-  { id: 'realestate', label: 'Real Estate', icon: Home },
-  { id: 'service', label: 'Service', icon: Wrench },
+  { id: 'ecommerce', label: 'E-Commerce', icon: ShoppingCart },
   { id: 'mobile', label: 'Mobile App', icon: Smartphone },
 ];
 
 const projects = [
-  // Web — E-Commerce
   {
     id: 1,
-    title: 'Your Next Store',
-    category: 'ecommerce',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-    description: 'Open-source e-commerce platform with Next.js, Stripe, and ultra-fast storefront. Live demo available.',
-    tech: ['Next.js', 'Stripe', 'TypeScript', 'Tailwind'],
-    demoUrl: 'https://demo.yournextstore.com',
-    githubUrl: 'https://github.com/yournextstore/yournextstore',
-    stats: { views: '5.3K', likes: '643' },
-  },
-  // Web — Real Estate
-  {
-    id: 6,
     title: 'NewsFlow',
-    category: 'Mobile',
-    image: 'https://images.unsplash.com/photo-1760199789464-7d3989e22758?q=80&w=687&auto=format&fit=crop',
-    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
-    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    category: 'webapp',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop',
+    badge: 'Full-Stack AI',
+    description: 'End-to-end AI news intelligence platform — crawls multiple sources, clusters related stories with vector embeddings, then streams developer-focused summaries via Gemini & Groq LLMs.',
+    tech: ['Next.js 14', 'FastAPI', 'Python', 'Supabase', 'pgvector', 'BeautifulSoup4', 'Playwright', 'Gemini API', 'Groq', 'Tailwind', 'shadcn/ui'],
     demoUrl: 'https://real-estate-hub-pi.vercel.app',
     githubUrl: 'https://github.com/infinitelife102/NewsFlow',
     stats: { views: '1K', likes: '1' },
+    purpose: 'Kill developer news overload — auto-collect, deduplicate, cluster, and summarize IT/AI articles so you see only the insights that matter, powered entirely by free-tier AI APIs.',
+    features: [
+      'Multi-source crawler: NewsAPI, RSS feeds & Playwright scraping',
+      'Sentence-transformer embeddings + cosine-similarity clustering',
+      'Gemini / Groq LLM summarization with streaming output',
+      'Supabase + pgvector for scalable vector similarity search',
+      'Parallel count + list queries for sub-2 round-trip page loads',
+      'Per-article & per-cluster AI summary views with "Show more" UX',
+      'Admin panel for crawl management & cluster deletion',
+    ],
+    achievements: [
+      'Built a complete crawl → embed → cluster → summarize AI pipeline from scratch',
+      'Achieved fast page loads via thread-pool-parallelized Supabase queries',
+      'Delivered full documentation: Architecture, API, Setup & Clustering guides',
+    ],
   },
-  // Web — Real Estate
   {
-    id: 6,
-    title: 'E-Commerce-Template',
-    category: 'E-Commerce',
-    image: 'https://thumbs.dreamstime.com/b/online-shopping-ecommerce-laptop-phone-bicycle-shoes-modern-technology-digital-lifestyle-retail-purchase-internet-store-person-357096364.jpg?w=768',
-    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
-    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    id: 2,
+    title: 'E-Commerce Template',
+    category: 'ecommerce',
+    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=600&fit=crop',
+    badge: 'Live Demo',
+    description: 'Pixel-perfect React 19 storefront with a blazing-fast Vite 7 build — silky-smooth checkout flow, persistent cart, and responsive design, all without a single line of backend.',
+    tech: ['React 19', 'Vite 7', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'React Router 7', 'shadcn/ui'],
     demoUrl: 'https://infinitelife102.github.io/E-Commerce-Template/',
     githubUrl: 'https://github.com/infinitelife102/E-Commerce-Template',
     stats: { views: '1K', likes: '1' },
-  },  
-  // Web App
+    purpose: 'Prove that a polished, production-grade shopping experience can be delivered purely in the browser — ideal as a rapid client demo or zero-backend starter kit.',
+    features: [
+      'Multi-category product catalog with instant client-side search',
+      'Rich product detail pages with related-item recommendations',
+      'Persistent cart powered by localStorage — survives page reload',
+      'Full checkout flow with shipping address input & order summary',
+      'Mobile-first responsive layout built with Radix UI primitives',
+    ],
+    achievements: [
+      'Zero-backend architecture — ships as a fully static site to GitHub Pages',
+      'Adopts React 19 concurrent features & Vite 7 build pipeline for lightning DX',
+    ],
+  },
   {
-    id: 5,
-    title: 'AI-Chatting',
-    category: 'Web App',
-    image: 'https://plus.unsplash.com/premium_vector-1725939109042-ed1ce1a716cf?q=80&w=880&auto=format&fit=crop',
-    description: 'Full-stack real estate platform with Mapbox, Google Auth, Cloudinary, and owner messaging.',
-    tech: ['Next.js', 'Mapbox', 'MongoDB', 'Cloudinary'],
+    id: 3,
+    title: 'CryptoTracker',
+    category: 'webapp',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop',
+    badge: 'Live Demo',
+    description: 'Professional-grade real-time crypto dashboard — tracks top 50 coins, renders interactive multi-period charts, manages a virtual portfolio with live P&L, and fires browser push alerts on price triggers. Pure frontend, zero backend.',
+    tech: ['React 19', 'TypeScript 5.9', 'Vite 7', 'Tailwind CSS 3.4', 'shadcn/ui', 'Recharts 2', 'Zustand 5', 'React Router 7', 'React Hook Form', 'Zod', 'CoinGecko API v3', 'Lucide React'],
+    demoUrl: 'https://crypto-track-fawn.vercel.app/',
+    githubUrl: 'https://github.com/infinitelife102/CryptoTrack',
+    stats: { views: '1K', likes: '1' },
+    purpose: 'Deliver a Bloomberg-like crypto experience entirely in the browser — no account, no API key, no server — using CoinGecko\'s free public API and Zustand-persisted local state.',
+    features: [
+      'Market Dashboard: top 50 coins with 1h / 24h / 7d % columns, green/red flash on live refresh every 30 s',
+      'Coin Detail: interactive area chart (1D / 7D / 30D / 1Y), ATH / ATL, market cap, supply stats',
+      'Virtual Portfolio: add holdings with quantity & avg buy price; real-time P&L, total return & cost-basis cards',
+      'Price Alerts: above / below triggers per coin — fires browser push notification when price crosses the target',
+      'Global Stats bar: live total market cap, 24h volume & BTC dominance — auto-refreshed every 30 s',
+      'Debounced live search + Favorites watchlist tab — all three stores persisted via Zustand persist + localStorage',
+    ],
+    achievements: [
+      'Fully static SPA — ships to Vercel with no backend; CoinGecko free tier powers all 6 API endpoints',
+      'Three independent Zustand persist stores (portfolio, alerts, favorites) survive page refresh & browser close',
+      'Robust error UX: 15 s timeout, HTTP 429 rate-limit detection, network error — each with a Retry button',
+    ],
+  },
+  {
+    id: 4,
+    title: 'AI Business Mentor Chat',
+    category: 'webapp',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=600&fit=crop',
+    badge: 'Streaming AI · Flutter',
+    description: 'Flutter AI chatbot powered by Llama 3.3-70B on Groq — responses stream word-by-word in real time and every conversation is persisted in Supabase PostgreSQL for unlimited history.',
+    tech: ['Flutter', 'Dart', 'Groq API', 'Llama 3.3-70B', 'Supabase', 'PostgreSQL'],
     demoUrl: 'https://ai-chatting-one.vercel.app/',
     githubUrl: 'https://github.com/infinitelife102/AI-Chatting',
     stats: { views: '1K', likes: '1' },
+    purpose: 'Give anyone a pocket business mentor — Groq\'s near-instant inference delivers rapid AI replies, while Supabase preserves every conversation for long-term knowledge retention.',
+    features: [
+      'Llama 3.3-70B-Versatile via Groq — state-of-the-art free-tier LLM',
+      'Server-sent-event streaming — tokens render as they arrive',
+      'Full conversation history stored & loaded from Supabase',
+      'Live connection health checks for Groq and Supabase',
+      'Cross-platform Flutter app: Android, iOS & Web',
+    ],
+    achievements: [
+      'Sub-500 ms time-to-first-token on Groq free tier',
+      'Streaming delta rendering with zero UI jank using custom stream manager',
+      'Documented architecture: SETUP, API reference & CONTRIBUTING guide',
+    ],
   },
-  // Mobile — Flutter
   {
-    id: 10,
-    title: 'Wisdom',
+    id: 5,
+    title: 'NoteTaking — Wisdom',
     category: 'mobile',
-    image: imgFlutter,
-    description: 'Production-ready Flutter demo with 25+ modules: dashboard, chat, email, kanban, e-commerce. Web & native.',
-    tech: ['Flutter', 'Dart', 'Material 3', 'Firebase'],
+    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&h=600&fit=crop',
+    badge: 'App Store Live',
+    description: 'Privacy-first Flutter note app — 100% offline, AES-encrypted Hive storage, rich text & images, and published live on the Apple App Store across 6 platforms from a single codebase.',
+    tech: ['Flutter', 'Dart', 'Hive (AES)', 'Material 3', 'flutter_launcher_icons', 'build_runner'],
     demoUrl: 'https://apps.apple.com/us/app/wisdom-note-taking-app/id6744746646',
-    githubUrl: 'https://github.com/infinitelife102/Wisdom',
+    githubUrl: 'https://github.com/infinitelife102/NoteTaking',
     stats: { views: '2K', likes: '—' },
+    purpose: 'Your notes, your device — no accounts, no cloud, no tracking. Fast, secure, beautiful note-taking that works everywhere Flutter runs, from phone to desktop to browser.',
+    features: [
+      'AES-encrypted local storage with Hive — data never leaves the device',
+      'Rich notes: text with formatting, camera capture & gallery images',
+      'Adaptive light / dark theme (system-sync or manual toggle)',
+      'Trash bin with one-tap restore for accidentally deleted notes',
+      'Universal builds: Android, iOS, macOS, Windows, Linux & Web',
+    ],
+    achievements: [
+      'Published on Apple App Store as "Wisdom Note Taking App"',
+      'Single Flutter codebase ships across 6 platforms simultaneously',
+      'Zero data collection — full privacy compliance by design',
+    ],
   },
-  // Mobile — Swift
   {
-    id: 11,
-    title: 'isowords',
+    id: 6,
+    title: 'NewsFlowApp',
     category: 'mobile',
-    image: imgIsowords,
-    description: 'Word search game on a 3D cube. SwiftUI + Composable Architecture. Available on App Store, open source.',
-    tech: ['Swift', 'SwiftUI', 'Composable Architecture'],
-    demoUrl: 'https://apps.apple.com/us/app/isowords/id1528246952',
-    githubUrl: 'https://github.com/pointfreeco/isowords',
-    stats: { views: '2.9K', likes: '—' },
-  },
-  // Mobile — Kotlin
-  {
-    id: 13,
-    title: 'Now in Android',
-    category: 'mobile',
-    image: imgNowInAndroid,
-    description: 'Official Android sample app in Kotlin & Jetpack Compose. News, bookmarks, push. Reference architecture.',
-    tech: ['Kotlin', 'Jetpack Compose', 'Android', 'Material 3'],
-    demoUrl: 'https://play.google.com/store/apps/details?id=com.google.samples.apps.nowinandroid',
-    githubUrl: 'https://github.com/android/nowinandroid',
-    stats: { views: '18.6K', likes: '3.5K' },
+    image: 'https://images.unsplash.com/photo-1760199789464-7d3989e22758?q=80&w=687&auto=format&fit=crop',
+    badge: 'KMM · Compose · SwiftUI',
+    description: 'Cross-platform news app with a single Kotlin Multiplatform core — shared ViewModels & Ktor networking power native Jetpack Compose on Android and SwiftUI on iOS simultaneously.',
+    tech: ['Kotlin Multiplatform', 'Jetpack Compose', 'SwiftUI', 'SQLDelight', 'Ktor', 'Kotlin Coroutines', 'Flow', 'Hilt'],
+    demoUrl: 'https://github.com/infinitelife102/NewsFlowApp',
+    githubUrl: 'https://github.com/infinitelife102/NewsFlowApp',
+    stats: { views: '—', likes: '—' },
+    purpose: 'Showcase KMM\'s "write once, run natively" potential — share business logic, networking and DB across platforms while keeping fully native, platform-idiomatic UIs.',
+    features: [
+      'KMM shared module: ViewModels, Ktor HTTP client & Kotlin Serialization',
+      'Jetpack Compose with Material You dynamic color on Android',
+      'SwiftUI with native feel on iOS',
+      'SQLDelight for type-safe local article caching & offline reading',
+      'MVVM + Kotlin Flow unidirectional data flow',
+      'Hilt dependency injection on Android',
+    ],
+    achievements: [
+      'One Kotlin codebase drives two fully native apps — Android & iOS',
+      'Clean Architecture: data · domain · presentation layers with clear boundaries',
+      'Country-specific news filtering via News API integration',
+    ],
   },
 ];
 
@@ -120,6 +181,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     >
       <div className="gradient-border p-0.5 rounded-2xl h-full">
         <div className="glass rounded-2xl overflow-hidden h-full flex flex-col">
+
           {/* Image */}
           <div className="relative aspect-video overflow-hidden">
             <motion.img
@@ -128,21 +190,17 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60" />
-            
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-70" />
+
             {/* Hover Actions */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              className="absolute inset-0 bg-background/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity"
-            >
+            <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <motion.a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center"
+                className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center shadow-lg"
               >
                 <Eye className="w-5 h-5 text-primary-foreground" />
               </motion.a>
@@ -150,50 +208,106 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white/10"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-white/10 shadow-lg"
               >
                 <Github className="w-5 h-5 text-primary-foreground" />
               </motion.a>
-            </motion.div>
+            </div>
 
-            {/* Category Badge */}
-            <div className="absolute top-4 left-4">
-              <span className="px-3 py-1 rounded-full glass text-xs font-medium text-foreground/90 capitalize">
+            {/* Category Badge — bottom-left */}
+            <div className="absolute bottom-3 left-3">
+              <span className="px-2.5 py-1 rounded-full glass text-xs font-medium text-foreground/90 capitalize backdrop-blur-md">
                 {project.category}
               </span>
             </div>
 
-            {/* Stats */}
-            {/* <div className="absolute top-4 right-4 flex gap-3">
-              <div className="flex items-center gap-1 glass px-2 py-1 rounded-full">
-                <Eye className="w-3 h-3 text-muted-foreground" />
-                <span className="text-xs text-muted-foreground font-medium">{project.stats.views}</span>
+            {/* Highlight Badge — top-right */}
+            {'badge' in project && project.badge && (
+              <div className="absolute top-3 right-3">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/90 text-primary-foreground backdrop-blur-md shadow-md">
+                  {project.badge}
+                </span>
               </div>
-            </div> */}
+            )}
           </div>
 
           {/* Content */}
-          <div className="p-5 flex-1 flex flex-col">
-            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+          <div className="p-5 flex-1 flex flex-col gap-3">
+
+            {/* Title */}
+            <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
               {project.title}
             </h3>
-            <p className="text-muted-foreground text-sm mb-4 line-clamp-2 flex-1 font-medium">
+
+            {/* Description */}
+            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 font-medium">
               {project.description}
             </p>
 
+            {/* Purpose */}
+            {'purpose' in project && project.purpose && (
+              <div className="flex gap-2 items-start">
+                <Zap className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+                <p className="text-muted-foreground/90 text-xs leading-relaxed line-clamp-2">
+                  {project.purpose}
+                </p>
+              </div>
+            )}
+
+            {/* Features */}
+            {'features' in project && Array.isArray(project.features) && project.features.length > 0 && (
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-1.5">Key Features</p>
+                <ul className="space-y-1">
+                  {project.features.slice(0, 3).map((f, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" />
+                      <span className="text-muted-foreground text-xs leading-relaxed">{f}</span>
+                    </li>
+                  ))}
+                  {project.features.length > 3 && (
+                    <li className="text-xs text-muted-foreground/60 pl-5">
+                      +{project.features.length - 3} more features
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {/* Achievements */}
+            {'achievements' in project && Array.isArray(project.achievements) && project.achievements.length > 0 && (
+              <div>
+                <p className="text-xs font-semibold text-foreground/70 uppercase tracking-wide mb-1.5">Achievements</p>
+                <ul className="space-y-1">
+                  {project.achievements.slice(0, 2).map((a, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <Trophy className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
+                      <span className="text-muted-foreground text-xs leading-relaxed">{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((tech) => (
+            <div className="flex flex-wrap gap-1.5 mt-auto pt-1 border-t border-border/40">
+              {project.tech.slice(0, 6).map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 rounded-md text-xs font-medium bg-muted/50 text-foreground/90 border border-border"
+                  className="px-2 py-0.5 rounded-md text-xs font-medium bg-muted/60 text-foreground/80 border border-border/60"
                 >
                   {tech}
                 </span>
               ))}
+              {project.tech.length > 6 && (
+                <span className="px-2 py-0.5 rounded-md text-xs font-medium bg-muted/40 text-muted-foreground border border-border/40">
+                  +{project.tech.length - 6}
+                </span>
+              )}
             </div>
+
           </div>
         </div>
       </div>

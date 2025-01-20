@@ -12,6 +12,32 @@ const categories = [
 const projects = [
   {
     id: 1,
+    title: 'MarketHub',
+    category: 'ecommerce',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
+    badge: 'Multi-Vendor · AI',
+    description: 'Full-stack multi-vendor e-commerce platform — buyers, sellers, and admins each get a dedicated portal. Stripe payments, Supabase auth, real-time analytics, and Grok AI-powered product descriptions.',
+    tech: ['Next.js 14', 'TypeScript', 'Supabase', 'Stripe', 'Grok API (xAI)', 'Tailwind CSS', 'Recharts', 'PostgreSQL'],
+    demoUrl: 'https://market-hub-delta.vercel.app/',
+    githubUrl: 'https://github.com/infinitelife102/MarketHub',
+    stats: { views: '—', likes: '—' },
+    purpose: 'Build a production-ready marketplace where vendors can list & manage products, admins can approve sellers and track revenue, and buyers get a seamless checkout — all on one platform.',
+    features: [
+      'Three-role system: Buyer · Vendor · Admin — each with a dedicated portal & dashboard',
+      'Stripe checkout & subscriptions with webhook handling; Supabase Auth + Google OAuth',
+      'Vendor dashboard: product CRUD, order management & real revenue/order analytics charts',
+      'Admin dashboard: live stats (vs. prior month %), 7-day revenue chart, vendor approval flow',
+      'Grok (xAI) AI — auto-generates product descriptions & summarizes customer reviews',
+      'Persistent cart & wishlist via React Context; product catalog with category, search & filter',
+    ],
+    achievements: [
+      'End-to-end marketplace: buyer, vendor & admin flows all wired to a live Supabase PostgreSQL DB',
+      'Real admin analytics — revenue/orders grouped by day, month-over-month % change from actual data',
+      'AI integration via Grok API for description generation & review summarization',
+    ],
+  },
+  {
+    id: 2,
     title: 'NewsFlow',
     category: 'webapp',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop',
@@ -38,7 +64,7 @@ const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: 'E-Commerce Template',
     category: 'ecommerce',
     image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=600&fit=crop',
@@ -62,7 +88,7 @@ const projects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: 'CryptoTracker',
     category: 'webapp',
     image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop',
@@ -88,7 +114,7 @@ const projects = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: 'AI Business Mentor Chat',
     category: 'webapp',
     image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=600&fit=crop',
@@ -113,7 +139,7 @@ const projects = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     title: 'NoteTaking — Wisdom',
     category: 'mobile',
     image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&h=600&fit=crop',
@@ -138,7 +164,7 @@ const projects = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     title: 'NewsFlowApp',
     category: 'mobile',
     image: 'https://images.unsplash.com/photo-1760199789464-7d3989e22758?q=80&w=687&auto=format&fit=crop',

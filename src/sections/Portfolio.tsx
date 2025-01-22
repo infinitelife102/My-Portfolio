@@ -1,6 +1,29 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Github, Eye, Layers, ShoppingCart, Globe, Smartphone, CheckCircle2, Trophy, Zap } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+
+// NewsFlow gallery
+import newsflowArticle from '@/assets/newsflow/article.png';
+import newsflowCluster from '@/assets/newsflow/cluster.png';
+import newsflowSummarizing from '@/assets/newsflow/summarizing.png';
+import newsflowSummarizeSuccess from '@/assets/newsflow/summarize_success.png';
+// NewsFlowApp gallery
+import newsflowappHeadline from '@/assets/newsflowapp/headline.png';
+import newsflowappSports from '@/assets/newsflowapp/sports.png';
+import newsflowappBusiness from '@/assets/newsflowapp/business.png';
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
@@ -61,6 +84,12 @@ const projects = [
       'Built a complete crawl → embed → cluster → summarize AI pipeline from scratch',
       'Achieved fast page loads via thread-pool-parallelized Supabase queries',
       'Delivered full documentation: Architecture, API, Setup & Clustering guides',
+    ],
+    galleryImages: [
+      newsflowArticle,
+      newsflowCluster,
+      newsflowSummarizing,
+      newsflowSummarizeSuccess,
     ],
   },
   {
@@ -188,12 +217,26 @@ const projects = [
       'Clean Architecture: data · domain · presentation layers with clear boundaries',
       'Country-specific news filtering via News API integration',
     ],
+    galleryImages: [
+      newsflowappHeadline,
+      newsflowappSports,
+      newsflowappBusiness,
+    ],
   },
 ];
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+function ProjectCard({
+  project,
+  index,
+  onEyeClick,
+}: {
+  project: typeof projects[0];
+  index: number;
+  onEyeClick: (project: typeof projects[0]) => void;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: '-50px' });
+  const hasGallery = 'galleryImages' in project && Array.isArray(project.galleryImages) && project.galleryImages.length > 0;
 
   return (
     <motion.div
@@ -220,16 +263,28 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
             {/* Hover Actions */}
             <div className="absolute inset-0 bg-background/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <motion.a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.12 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center shadow-lg"
-              >
-                <Eye className="w-5 h-5 text-primary-foreground" />
-              </motion.a>
+              {hasGallery ? (
+                <motion.button
+                  type="button"
+                  onClick={() => onEyeClick(project)}
+                  whileHover={{ scale: 1.12 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center shadow-lg border-0 cursor-pointer"
+                >
+                  <Eye className="w-5 h-5 text-primary-foreground" />
+                </motion.button>
+              ) : (
+                <motion.a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.12 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-full btn-gradient flex items-center justify-center shadow-lg"
+                >
+                  <Eye className="w-5 h-5 text-primary-foreground" />
+                </motion.a>
+              )}
               <motion.a
                 href={project.githubUrl}
                 target="_blank"
@@ -343,12 +398,38 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [galleryProject, setGalleryProject] = useState<typeof projects[0] | null>(null);
+  const carouselApiRef = useRef<CarouselApi | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  // Keyboard navigation when gallery dialog is open
+  useEffect(() => {
+    if (!galleryProject) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        carouselApiRef.current?.scrollPrev();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        carouselApiRef.current?.scrollNext();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [galleryProject]);
 
   const filteredProjects = activeCategory === 'all'
     ? projects
     : projects.filter(p => p.category === activeCategory);
+
+  const handleEyeClick = (project: typeof projects[0]) => {
+    if ('galleryImages' in project && Array.isArray(project.galleryImages) && project.galleryImages.length > 0) {
+      setGalleryProject(project);
+    } else {
+      window.open(project.demoUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <section id="portfolio" ref={sectionRef} className="relative py-24 lg:py-32">
@@ -403,12 +484,54 @@ export default function Portfolio() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onEyeClick={handleEyeClick}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
 
       </div>
+
+      {/* Gallery slide dialog for NewsFlow / NewsFlowApp */}
+      <Dialog open={!!galleryProject} onOpenChange={(open) => !open && setGalleryProject(null)}>
+        <DialogContent className="max-w-[95vw] w-full max-h-[95vh] h-[90vh] overflow-hidden flex flex-col p-0 gap-0 sm:max-w-[90vw]">
+          {galleryProject && 'galleryImages' in galleryProject && Array.isArray(galleryProject.galleryImages) && (
+            <>
+              <DialogTitle className="sr-only">{galleryProject.title} — Screenshots</DialogTitle>
+              <div className="px-6 pt-4 pb-2 pr-12 text-lg font-semibold text-foreground shrink-0">
+                {galleryProject.title}
+              </div>
+              <div className="flex-1 min-h-0 flex items-center justify-center px-4 pb-4">
+                <Carousel
+                  opts={{ loop: true }}
+                  className="w-full h-full"
+                  setApi={(api) => { carouselApiRef.current = api; }}
+                >
+                  <CarouselContent className="-ml-2 sm:-ml-4 h-full">
+                    {galleryProject.galleryImages.map((src, i) => (
+                      <CarouselItem key={i} className="pl-2 sm:pl-4 basis-full flex items-center justify-center">
+                        <div className="w-full h-full min-h-[70vh] flex items-center justify-center bg-muted/20 rounded-lg">
+                          <img
+                            src={src}
+                            alt={`${galleryProject.title} screenshot ${i + 1}`}
+                            className="max-w-full max-h-[78vh] w-auto h-auto object-contain"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-2 sm:left-4 size-10" />
+                  <CarouselNext className="right-2 sm:right-4 size-10" />
+                </Carousel>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

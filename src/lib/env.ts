@@ -8,7 +8,7 @@ export const env = {
   profileLocation: (import.meta.env.VITE_PROFILE_LOCATION as string) ?? '',
   profileBirthday: (import.meta.env.VITE_PROFILE_BIRTHDAY as string) ?? '',
   discord: (import.meta.env.VITE_DISCORD as string) ?? '',
-  whatsapp: (import.meta.env.VITE_WHATSAPP as string) ?? '',
+  telegram: (import.meta.env.VITE_TELEGRAM as string) ?? '',
   formspreeId: (import.meta.env.VITE_FORMSPREE_ID as string) ?? '',
 } as const;
 

@@ -17,7 +17,7 @@ Defined in `.env` (see `.env.example`). All `VITE_*` vars are exposed to the cli
 | `VITE_PROFILE_LOCATION` | About, Contact, CV PDF | Location (e.g. Tokyo) |
 | `VITE_PROFILE_BIRTHDAY` | About, CV PDF | Birthday (e.g. Aug 1995) |
 | `VITE_DISCORD` | Contact | Optional. Discord URL or username |
-| `VITE_WHATSAPP` | Contact | Optional. WhatsApp number with country code |
+| `VITE_TELEGRAM` | Contact | Optional. Telegram username or full t.me URL |
 | `VITE_FORMSPREE_ID` | Contact form | Formspree form ID so "Send Me a Message" emails you |
 
 Config is read from `src/lib/env.ts`. Contact form POSTs to `https://formspree.io/f/{VITE_FORMSPREE_ID}` with JSON body.
@@ -47,7 +47,7 @@ src/
 │   ├── About.tsx     # Intro, skills, stats; Born/Location/Email from env
 │   ├── Resume.tsx    # Experience / education timeline
 │   ├── Portfolio.tsx # Project cards (no "View More on GitHub")
-│   └── Contact.tsx   # Email + optional Discord/WhatsApp, Formspree form
+│   └── Contact.tsx   # Email + optional Discord/Telegram, Formspree form
 ├── App.tsx           # Root: loading, DevBackground, nav, footer
 ├── main.tsx          # React entry
 └── index.css         # Tailwind, global and background styles

@@ -26,7 +26,7 @@ Copy `.env.example` to `.env` and set your values. All profile and contact data 
 | `VITE_PROFILE_LOCATION` | Location (e.g. Tokyo) |
 | `VITE_PROFILE_BIRTHDAY` | Birthday (e.g. Aug 1995) |
 | `VITE_DISCORD` | Optional. Discord invite URL or username |
-| `VITE_WHATSAPP` | Optional. WhatsApp number with country code (e.g. 819012345678) |
+| `VITE_TELEGRAM` | Optional. Telegram username (e.g. johndoe) or full t.me URL |
 | `VITE_FORMSPREE_ID` | Formspree form ID for "Send Me a Message". Create a form at [formspree.io](https://formspree.io) and set this so messages are emailed to you. |
 
 Without `VITE_FORMSPREE_ID`, the contact form will show an error when submitting.
@@ -72,7 +72,7 @@ src/
 ```
 
 - **Hero**: Name from env, "View My Work" and "Download CV" (CV is generated via jsPDF from env).
-- **Contact**: Email (and optional Discord/WhatsApp from env). "Send Me a Message" submits to Formspree when `VITE_FORMSPREE_ID` is set.
+- **Contact**: Email (and optional Discord/Telegram from env). "Send Me a Message" submits to Formspree when `VITE_FORMSPREE_ID` is set.
 - **Background**: Static grid + subtle gradient.
 
 ## Scripts

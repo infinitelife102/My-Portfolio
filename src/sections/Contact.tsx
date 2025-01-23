@@ -21,13 +21,14 @@ function useContactChannels() {
       href: discordUrl,
     });
   }
-  if (env.whatsapp?.trim()) {
-    const num = env.whatsapp.replace(/\D/g, '');
+  if (env.telegram?.trim()) {
+    const raw = env.telegram.trim();
+    const href = raw.startsWith('http') ? raw : `https://t.me/${raw.replace(/^@/, '')}`;
     channels.push({
       icon: MessageCircle,
-      label: 'WhatsApp',
-      value: env.whatsapp,
-      href: `https://wa.me/${num}`,
+      label: 'Telegram',
+      value: raw.startsWith('http') ? raw : `@${raw.replace(/^@/, '')}`,
+      href,
     });
   }
   return channels;

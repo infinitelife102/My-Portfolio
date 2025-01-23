@@ -6,7 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_PROFILE_LOCATION?: string;
   readonly VITE_PROFILE_BIRTHDAY?: string;
   readonly VITE_DISCORD?: string;
-  readonly VITE_WHATSAPP?: string;
+  readonly VITE_TELEGRAM?: string;
   readonly VITE_FORMSPREE_ID?: string;
 }
 

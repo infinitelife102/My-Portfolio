@@ -193,6 +193,4 @@ src/
 
 *Built with ❤️ using React 19 + TypeScript + Vite + Tailwind CSS*
 
-**© 2026 Atsushi Kimura. All rights reserved.**
-
 </div>

@@ -1,96 +1,143 @@
-# My Portfolio — Developer docs
+<div align="center">
 
-## Overview
+# 🛠️ System Architecture & Developer Guide
 
-- **Project**: My Portfolio  
-- **Purpose**: Developer portfolio; profile and contact data are configured via environment variables (no hardcoded personal data).  
-- **Stack**: Node.js 20+, Vite 7.x, React 19, TypeScript, Tailwind CSS 3.4.x  
+### **"The Internal Blueprint of Atsushi Kimura's Portfolio"**
 
-## Environment variables
+<br/>
 
-Defined in `.env` (see `.env.example`). All `VITE_*` vars are exposed to the client.
+[![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-| Variable | Used in | Description |
-|----------|---------|-------------|
-| `VITE_PROFILE_NAME` | Hero, About (initials), CV PDF | Full name |
-| `VITE_PROFILE_EMAIL` | About, Contact, CV PDF | Email |
-| `VITE_PROFILE_LOCATION` | About, Contact, CV PDF | Location (e.g. Tokyo) |
-| `VITE_PROFILE_BIRTHDAY` | About, CV PDF | Birthday (e.g. Aug 1995) |
-| `VITE_DISCORD` | Contact | Optional. Discord URL or username |
-| `VITE_TELEGRAM` | Contact | Optional. Telegram username or full t.me URL |
-| `VITE_FORMSPREE_ID` | Contact form | Formspree form ID so "Send Me a Message" emails you |
+</div>
 
-Config is read from `src/lib/env.ts`. Contact form POSTs to `https://formspree.io/f/{VITE_FORMSPREE_ID}` with JSON body.
+---
 
-## Config summary
+## 📌 Project Overview
 
-| Item        | Value                    |
-|------------|---------------------------|
-| Bundler    | Vite 7.x                  |
-| Port       | 5173 (falls back if in use) |
-| Path alias | `@` → `src/`              |
-| Build out  | `dist/` (base: `./`)      |
+This is a high-performance, single-page developer portfolio designed for maximum flexibility. The core philosophy is **"Zero Hardcoding"**—all personal identity, contact details, and dynamic content are driven by environment variables, allowing the same engine to power multiple profiles effortlessly.
 
-## Directory structure
+- **Engine**: React 19 + Vite 7 (Latest stable stack)
+- **Styling**: Tailwind CSS 3.4 (Utility-first)
+- **Components**: Radix UI + shadcn/ui primitives
+- **Intelligence**: Integrated with Formspree for serverless contact handling
 
-```
-src/
-├── components/       # Shared components
-│   ├── ui/           # shadcn-style UI (button, card, dialog, etc.)
-│   ├── Navigation.tsx
-│   └── Footer.tsx
-├── lib/              # Shared logic
-│   ├── env.ts        # Profile/contact config from import.meta.env
-│   └── downloadCv.ts # CV PDF generation (jsPDF) using env
-├── sections/         # Main page sections
-│   ├── Hero.tsx      # Hero, name from env, role typing, Download CV
-│   ├── About.tsx     # Intro, skills, stats; Born/Location/Email from env
-│   ├── Resume.tsx    # Experience / education timeline
-│   ├── Portfolio.tsx # Project cards (no "View More on GitHub")
-│   └── Contact.tsx   # Email + optional Discord/Telegram, Formspree form
-├── App.tsx           # Root: loading, DevBackground, nav, footer
-├── main.tsx          # React entry
-└── index.css         # Tailwind, global and background styles
-```
+---
 
-## UI components (shadcn/Radix)
+## 🔐 Environment Configuration
 
-accordion, alert-dialog, alert, aspect-ratio, avatar, badge, breadcrumb,  
-button-group, button, calendar, card, carousel, chart, checkbox, collapsible,  
-command, context-menu, dialog, drawer, dropdown-menu, empty, field, form,  
-hover-card, input-group, input-otp, input, item, kbd, label, menubar,  
-navigation-menu, pagination, popover, progress, radio-group, resizable,  
-scroll-area, select, separator, sheet, sidebar, skeleton, slider, sonner,  
-spinner, switch, table, tabs, textarea, toggle-group, toggle, tooltip  
+The application security and personalization rely on the `.env` file. All variables prefixed with `VITE_` are exposed to the client-side code.
 
-Example:
+### 📝 Profile Data
+| Variable | Usage | Description |
+|:---|:---|:---|
+| `VITE_PROFILE_NAME` | Hero, About, CV PDF | Full identity name |
+| `VITE_PROFILE_EMAIL` | Contact, Footer, CV | Primary contact email |
+| `VITE_PROFILE_LOCATION` | About, Contact | Resident city/country |
+| `VITE_PROFILE_BIRTHDAY` | About Section | Date of birth |
 
-```ts
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
-```
+### 🔗 Social & Integration
+| Variable | Usage | Description |
+|:---|:---|:---|
+| `VITE_DISCORD` | Social Links | Discord invite or username |
+| `VITE_TELEGRAM` | Social Links | Telegram t.me link or handle |
+| `VITE_FORMSPREE_ID` | API Endpoint | Formspree ID for message routing |
 
-## Behavior
+> 🖇️ **Note:** Configuration is centralized in `src/lib/env.ts` for type-safe access throughout the app.
 
-- **Background**: `DevBackground` only (grid + gradient). No particles or custom cursor.
-- **Tab**: `index.html` — `<title>My Portfolio</title>`, `/favicon.svg`.
-- **Routing**: Single page; section links use anchors (#about, #portfolio, #contact).
-- **Contact form**: Real submission via Formspree when `VITE_FORMSPREE_ID` is set. Messages are sent to the form owner's email.
+---
 
-## References
-
-- **Tailwind**: `tailwind.config.js`, `postcss.config.js`  
-- **TypeScript**: `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`  
-- **ESLint**: `eslint.config.js`  
-- **Vite**: `vite.config.ts` (React plugin, `@` alias, base path)
-
-## Build & run
+## 🏗️ Directory Roadmap
 
 ```bash
-npm install
-cp .env.example .env   # then edit .env
-npm run dev      # Development
-npm run build    # Build
-npm run preview  # Preview dist
-npm run lint     # Lint
+f:\Portfolio\My-Portfolio\
+├── 📂 public/           # Static assets (Favicon, PDF templates)
+├── 📂 src/
+│   ├── 📂 components/   # Atomic UI Elements
+│   │   ├── 📂 ui/       # Radix/shadcn design system primitives
+│   │   ├── 🧩 Navigation.tsx
+│   │   └── 🧩 Footer.tsx
+│   ├── 📂 lib/          # Core Logic & Utilities
+│   │   ├── ⚙️ env.ts        # Environment variable validator
+│   │   └── 📄 downloadCv.ts  # jsPDF logic for dynamic CV generation
+│   ├── 📂 sections/     # Page Blocks (Logical grouping)
+│   │   ├── ⚡ Hero.tsx       # Animated entrance & CTA
+│   │   ├── 👤 About.tsx      # Personal bio & tech stats
+│   │   ├── 📜 Resume.tsx     # Vertical experience timeline
+│   │   ├── 📁 Portfolio.tsx  # Interactive project grid
+│   │   └── 📧 Contact.tsx    # Formspree-powered communications
+│   ├── 🧪 App.tsx       # Layout wrapper & Theme provider
+│   ├── 🏁 main.tsx      # Application entry point
+│   └── 🎨 index.css     # Global design tokens & Grid logic
+└── ⚙️ vite.config.ts    # Build optimization & Path aliases
 ```
+
+---
+
+## 🎨 Component Library (Internal UI System)
+
+The project leverages a robust set of UI primitives based on **Radix UI**, ensuring high accessibility (a11y) and silky-smooth interactions.
+
+<details>
+<summary>📂 View Available UI Components</summary>
+
+- **Navigation**: Menubar, Pagination, Breadcrumb, Tabs
+- **Forms**: Input, Textarea, Select, Checkbox, Radio, Switch, Form validation
+- **Feedback**: Alert, AlertDialog, Sonner (Toast), Progress, Skeleton, Spinner
+- **Overlay**: Dialog, Sheet, Popover, Drawer, HoverCard, Tooltip
+- **Data Display**: Tables, Cards, Accordion, Carousel, Calendar, Badge
+- **Layout**: Sidebar, ScrollArea, Separator, Resizable, AspectRatio
+
+</details>
+
+```tsx
+// Example of type-safe component usage
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+```
+
+---
+
+## 💻 Developer Workflow
+
+### 🛠️ Local Setup
+```bash
+# 1. Prepare Environment
+npm install
+
+# 2. Inject Configuration (Essential)
+cp .env.example .env
+# Open .env and fill in your VITE_* credentials
+
+# 3. Boot Engine
+npm run dev
+```
+
+### 📦 Lifecycle Commands
+| Command | Description |
+|:---|:---|
+| `npm run build` | Compiles optimized production bundle to `/dist` |
+| `npm run preview` | Locally serve the production build for QA |
+| `npm run lint` | Execute ESLint rules for code quality |
+
+---
+
+## 🔄 Behavioral Logic
+
+1.  **The Grid System**: The `DevBackground` uses a 2D grid matrix with a radial gradient mask to create the modern "SaaS-lite" feel.
+2.  **Serverless Mail**: The contact form doesn't need a backend. It POSTs directly to `https://formspree.io/f/{ID}`, handling spam and delivery automatically.
+3.  **Dynamic PDF**: Clicking "Download CV" triggers `jsPDF` to generate a resume on-the-fly using the cached environment variables. No static PDF storage needed!
+
+---
+
+<div align="center">
+
+**[← Back to Main README](./README.md)**
+
+<br/>
+
+*Designed for Engineers. Documentation by Atsushi Kimura.*
+
+</div>

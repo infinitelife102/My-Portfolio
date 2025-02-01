@@ -24,9 +24,14 @@ import newsflowSummarizeSuccess from '@/assets/newsflow/summarize_success.png';
 import newsflowappHeadline from '@/assets/newsflowapp/headline.png';
 import newsflowappSports from '@/assets/newsflowapp/sports.png';
 import newsflowappBusiness from '@/assets/newsflowapp/business.png';
+// MultiPDF gallery
+import multipdfArchitecture from '@/assets/MultiPDF/Architecture.jpg';
+import multipdfCalmOutput from '@/assets/MultiPDF/CALMOutput.png';
+import multipdfLLMframework from '@/assets/MultiPDF/LLMframework.png';
 
 const categories = [
   { id: 'all', label: 'All', icon: Layers },
+  { id: 'ai', label: 'AI', icon: Zap },
   { id: 'webapp', label: 'Web App', icon: Globe },
   { id: 'ecommerce', label: 'E-Commerce', icon: ShoppingCart },
   { id: 'mobile', label: 'Mobile App', icon: Smartphone },
@@ -221,6 +226,36 @@ const projects = [
       newsflowappHeadline,
       newsflowappSports,
       newsflowappBusiness,
+    ],
+  },
+  {
+    id: 8,
+    title: 'MultiPDF Chatbot',
+    category: 'ai',
+    image: multipdfLLMframework,
+    badge: 'RAG · Local LLM',
+    description: 'RAG-based multi-document assistant that lets users upload multiple PDFs and ask natural language questions locally using Ollama, FAISS, and LangChain.',
+    tech: ['Python', 'Streamlit', 'LangChain', 'Ollama', 'FAISS', 'PyPDF2'],
+    demoUrl: 'https://github.com/infinitelife102/MultiPDF_Chatbot',
+    githubUrl: 'https://github.com/infinitelife102/MultiPDF_Chatbot',
+    stats: { views: '—', likes: '—' },
+    purpose: 'Build a fully local, privacy-first document QA system that supports multiple PDFs and delivers context-grounded answers without any cloud dependency.',
+    features: [
+      'Upload and process multiple PDFs in one session',
+      'RAG pipeline: chunking, embeddings, vector search, and grounded answer generation',
+      'Local embeddings and LLM inference via Ollama',
+      'FAISS-powered semantic retrieval for fast relevant context lookup',
+      'Simple Streamlit UI with upload, process, and chat workflow',
+    ],
+    achievements: [
+      'Implemented an end-to-end local RAG system with zero external API requirement',
+      'Combined multi-PDF ingestion with fast semantic retrieval and answer synthesis',
+      'Documented architecture and setup for reproducible local deployment',
+    ],
+    galleryImages: [
+      multipdfArchitecture,
+      multipdfLLMframework,
+      multipdfCalmOutput,
     ],
   },
 ];

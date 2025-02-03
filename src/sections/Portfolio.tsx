@@ -24,6 +24,15 @@ import newsflowSummarizeSuccess from '@/assets/newsflow/summarize_success.png';
 import newsflowappHeadline from '@/assets/newsflowapp/headline.png';
 import newsflowappSports from '@/assets/newsflowapp/sports.png';
 import newsflowappBusiness from '@/assets/newsflowapp/business.png';
+// Portfolio card cover images
+import marketHubImage from '@/assets/portfolio/MarketHub.png';
+import newsFlowImage from '@/assets/portfolio/NewsFlow.png';
+import ecommerceTemplateImage from '@/assets/portfolio/E-Commerce Template.png';
+import cryptoTrackerImage from '@/assets/portfolio/CryptoTracker.png';
+import aiBusinessMentorChatImage from '@/assets/portfolio/AI Business Mentor Chat.png';
+import noteTakingWisdomImage from '@/assets/portfolio/NoteTaking — Wisdom.png';
+import newsFlowAppImage from '@/assets/portfolio/NewsFlowApp.png';
+import multiPdfChatbotImage from '@/assets/portfolio/MultiPDF Chatbot.png';
 // MultiPDF gallery
 import multipdfArchitecture from '@/assets/MultiPDF/Architecture.jpg';
 import multipdfCalmOutput from '@/assets/MultiPDF/CALMOutput.png';
@@ -42,7 +51,7 @@ const projects = [
     id: 1,
     title: 'MarketHub',
     category: 'ecommerce',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
+    image: marketHubImage,
     badge: 'Multi-Vendor · AI',
     description: 'Full-stack multi-vendor e-commerce platform — buyers, sellers, and admins each get a dedicated portal. Stripe payments, Supabase auth, real-time analytics, and Grok AI-powered product descriptions.',
     tech: ['Next.js 14', 'TypeScript', 'Supabase', 'Stripe', 'Grok API (xAI)', 'Tailwind CSS', 'Recharts', 'PostgreSQL'],
@@ -68,7 +77,7 @@ const projects = [
     id: 2,
     title: 'NewsFlow',
     category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop',
+    image: newsFlowImage,
     badge: 'Full-Stack AI',
     description: 'End-to-end AI news intelligence platform — crawls multiple sources, clusters related stories with vector embeddings, then streams developer-focused summaries via Gemini & Groq LLMs.',
     tech: ['Next.js 14', 'FastAPI', 'Python', 'Supabase', 'pgvector', 'BeautifulSoup4', 'Playwright', 'Gemini API', 'Groq', 'Tailwind', 'shadcn/ui'],
@@ -101,7 +110,7 @@ const projects = [
     id: 3,
     title: 'E-Commerce Template',
     category: 'ecommerce',
-    image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=600&fit=crop',
+    image: ecommerceTemplateImage,
     badge: 'Live Demo',
     description: 'Pixel-perfect React 19 storefront with a blazing-fast Vite 7 build — silky-smooth checkout flow, persistent cart, and responsive design, all without a single line of backend.',
     tech: ['React 19', 'Vite 7', 'TypeScript', 'Tailwind CSS', 'Radix UI', 'React Router 7', 'shadcn/ui'],
@@ -125,7 +134,7 @@ const projects = [
     id: 4,
     title: 'CryptoTracker',
     category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop',
+    image: cryptoTrackerImage,
     badge: 'Live Demo',
     description: 'Professional-grade real-time crypto dashboard — tracks top 50 coins, renders interactive multi-period charts, manages a virtual portfolio with live P&L, and fires browser push alerts on price triggers. Pure frontend, zero backend.',
     tech: ['React 19', 'TypeScript 5.9', 'Vite 7', 'Tailwind CSS 3.4', 'shadcn/ui', 'Recharts 2', 'Zustand 5', 'React Router 7', 'React Hook Form', 'Zod', 'CoinGecko API v3', 'Lucide React'],
@@ -151,7 +160,7 @@ const projects = [
     id: 5,
     title: 'AI Business Mentor Chat',
     category: 'webapp',
-    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&h=600&fit=crop',
+    image: aiBusinessMentorChatImage,
     badge: 'Streaming AI · Flutter',
     description: 'Flutter AI chatbot powered by Llama 3.3-70B on Groq — responses stream word-by-word in real time and every conversation is persisted in Supabase PostgreSQL for unlimited history.',
     tech: ['Flutter', 'Dart', 'Groq API', 'Llama 3.3-70B', 'Supabase', 'PostgreSQL'],
@@ -176,7 +185,7 @@ const projects = [
     id: 6,
     title: 'NoteTaking — Wisdom',
     category: 'mobile',
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=800&h=600&fit=crop',
+    image: noteTakingWisdomImage,
     badge: 'App Store Live',
     description: 'Privacy-first Flutter note app — 100% offline, AES-encrypted Hive storage, rich text & images, and published live on the Apple App Store across 6 platforms from a single codebase.',
     tech: ['Flutter', 'Dart', 'Hive (AES)', 'Material 3', 'flutter_launcher_icons', 'build_runner'],
@@ -201,7 +210,7 @@ const projects = [
     id: 7,
     title: 'NewsFlowApp',
     category: 'mobile',
-    image: 'https://images.unsplash.com/photo-1760199789464-7d3989e22758?q=80&w=687&auto=format&fit=crop',
+    image: newsFlowAppImage,
     badge: 'KMM · Compose · SwiftUI',
     description: 'Cross-platform news app with a single Kotlin Multiplatform core — shared ViewModels & Ktor networking power native Jetpack Compose on Android and SwiftUI on iOS simultaneously.',
     tech: ['Kotlin Multiplatform', 'Jetpack Compose', 'SwiftUI', 'SQLDelight', 'Ktor', 'Kotlin Coroutines', 'Flow', 'Hilt'],
@@ -232,7 +241,7 @@ const projects = [
     id: 8,
     title: 'MultiPDF Chatbot',
     category: 'ai',
-    image: multipdfLLMframework,
+    image: multiPdfChatbotImage,
     badge: 'RAG · Local LLM',
     description: 'RAG-based multi-document assistant that lets users upload multiple PDFs and ask natural language questions locally using Ollama, FAISS, and LangChain.',
     tech: ['Python', 'Streamlit', 'LangChain', 'Ollama', 'FAISS', 'PyPDF2'],
